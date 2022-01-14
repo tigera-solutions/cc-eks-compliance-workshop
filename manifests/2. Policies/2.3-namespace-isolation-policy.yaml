@@ -1,0 +1,48 @@
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: security.pass-tenant1
+spec:
+  tier: security
+  order: 101
+  selector: tenant == "tenant1"
+  types:
+    - Ingress
+  ingress:
+    - action: Allow
+      protocol: TCP
+      destination:
+        selector: ingress == "true"
+        ports:
+          - 80
+    - action: Pass
+      destination:
+        selector: tenant == "tenant1"
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: security.pass-tenant2
+spec:
+  tier: security
+  order: 102
+  selector: tenant == "tenant2"
+  types:
+    - Ingress
+  ingress:
+    - action: Pass
+      destination:
+        selector: tenant == "tenant2"
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: security.default-deny-security-tier
+spec:
+  tier: security
+  order: 999999
+  selector: all()
+  types:
+    - Ingress
+  ingress:
+    - action: Deny

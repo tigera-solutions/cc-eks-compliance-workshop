@@ -1,0 +1,9 @@
+apiVersion: projectcalico.org/v3
+kind: GlobalReport
+metadata:
+  name: weekly-full-inventory
+spec:
+  reportType: inventory
+  schedule: 0 0 * * 0
+  jobNodeSelector:
+    nodetype: infrastructure

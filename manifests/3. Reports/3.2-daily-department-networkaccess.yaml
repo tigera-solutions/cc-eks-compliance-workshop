@@ -1,0 +1,10 @@
+apiVersion: projectcalico.org/v3
+kind: GlobalReport
+metadata:
+  name: daily-accounts-networkaccess
+spec:
+  reportType: network-access
+  endpoints:
+    namespaces:
+      selector: department == 'accounts'
+  schedule: 0 0 * * *
