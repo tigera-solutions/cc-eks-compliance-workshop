@@ -1,31 +1,71 @@
 apiVersion: projectcalico.org/v3
 kind: GlobalNetworkPolicy
 metadata:
-  name: default.pci
+  name: security.pci-whitelist
 spec:
-  tier: default
+  tier: security
   order: 0
-  selector: pci == "ok"
-  namespaceSelector: ""
-  serviceAccountSelector: ""
+  selector: all()
+  namespaceSelector: ''
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: app == "frontend"
+        ports:
+          - '8080'
+  egress:
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        ports:
+          - '53'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        ports:
+          - '53'
+  doNotTrack: false
+  applyOnForward: false
+  preDNAT: false
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: security.pci-restriction
+spec:
+  tier: security
+  order: 75
+  selector: pci == "true"
+  namespaceSelector: ''
+  serviceAccountSelector: ''
   ingress:
     - action: Allow
       source:
-        selector: pci == "ok"
+        selector: pci == "true"
       destination: {}
     - action: Deny
       source:
-        selector: pci != "ok"
+        selector: pci != "true"
       destination: {}
   egress:
     - action: Allow
       source: {}
       destination:
-        selector: pci == "ok"
+        selector: pci == "true"
     - action: Deny
       source: {}
       destination:
-        selector: pci != "ok"
+        selector: pci != "true"
   doNotTrack: false
   applyOnForward: false
   preDNAT: false

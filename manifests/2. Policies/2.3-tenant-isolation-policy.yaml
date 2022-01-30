@@ -1,0 +1,45 @@
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: security.tenant-hipstershop
+spec:
+  tier: security
+  order: -50
+  selector: tenant == "hipstershop"
+  namespaceSelector: ""
+  serviceAccountSelector: ""
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: app == "frontend"
+        ports:
+          - "8080"
+    - action: Allow
+      source:
+        selector: tenant == "hipstershop"
+      destination: {}
+    - action: Pass
+      source: {}
+      destination: {}
+  egress:
+    - action: Allow
+      source: {}
+      destination:
+        selector: tenant == "hipstershop"
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        ports:
+          - "53"
+    - action: Pass
+      source: {}
+      destination: {}
+  doNotTrack: false
+  applyOnForward: false
+  preDNAT: false
+  types:
+    - Ingress
+    - Egress

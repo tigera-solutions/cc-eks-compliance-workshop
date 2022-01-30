@@ -1,0 +1,302 @@
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: ad-allow-frontend
+  namespace: hipstershop
+spec:
+  tier: application
+  order: 1
+  podSelector:
+    matchLabels:
+      app: adservice
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: frontend
+    ports:
+      - port: 9555
+---
+
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: cache-allow-cart
+  namespace: hipstershop
+spec:
+  tier: application
+  order: 2
+  podSelector:
+    matchLabels:
+      app: redis-cart
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: cartservice
+    ports:
+      - port: 6379
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: cart-allow-checkout
+  namespace: hipstershop
+spec:
+  tier: application
+  order: 3
+  podSelector:
+    matchLabels:
+      app: cartservice
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: checkoutservice
+    ports:
+      - port: 7070
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: cart-allow-frontend
+  namespace: hipstershop
+spec:
+  tier: application
+  order: 4
+  podSelector:
+    matchLabels:
+      app: cartservice
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: frontend
+    ports:
+      - port: 7070
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: checkout-allow-frontend
+  namespace: hipstershop
+spec:
+  tier: application
+  order: 5
+  podSelector:
+    matchLabels:
+      app: checkoutservice
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: frontend
+    ports:
+      - port: 5050
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: currencyservice-allow-frontend
+  namespace: hipstershop
+spec:
+  tier: application
+  order: 6
+  podSelector:
+    matchLabels:
+      app: currencyservice
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: frontend
+    ports:
+      - port: 7000
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: currencyservice-allow-checkout
+  namespace: hipstershop
+spec:
+  tier: application
+  order: 7
+  podSelector:
+    matchLabels:
+      app: currencyservice
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: checkoutservice
+    ports:
+      - port: 7000
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: email-allow-checkout
+  namespace: hipstershop
+spec:
+  tier: application
+  order: 8
+  podSelector:
+    matchLabels:
+      app: emailservice
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: checkoutservice
+    ports:
+      - port: 5050
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: frontend-allow
+  namespace: hipstershop
+spec:
+  tier: application
+  order: 9
+  podSelector:
+    matchLabels:
+      app: frontend
+  ingress:
+  - from:
+    ports:
+      - port: 80
+      - port: 443
+---apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: payment-allow-checkout
+  namespace: hipstershop
+spec:
+  tier: application
+  order: 10
+  podSelector:
+    matchLabels:
+      app: paymentservice
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: checkoutservice
+    ports:
+      - port: 50051
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: product-allow-frontend
+  namespace: hipstershop
+spec:
+  tier: application
+  order: 11
+  podSelector:
+    matchLabels:
+      app: productcatalogservice
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: frontend
+    ports:
+      - port: 3550
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: product-allow-recommend
+  namespace: hipstershop
+spec:
+  tier: application
+  order: 12
+  podSelector:
+    matchLabels:
+      app: productcatalogservice
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: recommendationservice
+    ports:
+      - port: 3550
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: product-allow-checkout
+  namespace: hipstershop
+spec:
+  tier: application
+  order: 13
+  podSelector:
+    matchLabels:
+      app: productcatalogservice
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: checkoutservice
+    ports:
+      - port: 3550
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: recommendationservice-allow-frontend
+  namespace: hipstershop
+spec:
+  tier: application
+  order: 14
+  podSelector:
+    matchLabels:
+      app: recommendationservice
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: frontend
+    ports:
+      - port: 8080
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: shipping-allow-frontend
+  namespace: hipstershop
+spec:
+  tier: application
+  order: 15
+  podSelector:
+    matchLabels:
+      app: shippingservice
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: frontend
+    ports:
+      - port: 50051
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: shipping-allow-checkout
+  namespace: hipstershop
+spec:
+  tier: application
+  order: 16
+  podSelector:
+    matchLabels:
+      app: shippingservice
+  ingress:
+  - from:
+    - podSelector:
+        matchLabels:
+          app: checkoutservice
+    ports:
+      - port: 50051
+---

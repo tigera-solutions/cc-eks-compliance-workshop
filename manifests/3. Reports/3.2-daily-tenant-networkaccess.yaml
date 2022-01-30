@@ -1,10 +1,9 @@
 apiVersion: projectcalico.org/v3
 kind: GlobalReport
 metadata:
-  name: daily-accounts-networkaccess
+  name: daily-tenant-hipstershop-networkaccess
 spec:
   reportType: network-access
   endpoints:
-    namespaces:
-      selector: department == 'accounts'
+    selector: tenant=hipstershop
   schedule: 0 0 * * *
