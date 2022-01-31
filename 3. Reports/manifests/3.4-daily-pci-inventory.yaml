@@ -3,7 +3,7 @@ kind: GlobalReport
 metadata:
   name: daily-tenant-hipstershop-networkaccess
 spec:
-  reportType: network-access
+  reportType: inventory
   endpoints:
-    selector: tenant == "hipstershop"
+    selector: pci == "true"
   schedule: 0 0 * * *

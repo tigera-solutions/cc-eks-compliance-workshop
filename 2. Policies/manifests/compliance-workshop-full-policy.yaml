@@ -1,4 +1,25 @@
 apiVersion: projectcalico.org/v3
+kind: Tier
+metadata:
+  name: app-hipstershop
+spec:
+  order: 400
+---
+apiVersion: projectcalico.org/v3
+kind: Tier
+metadata:
+  name: platform
+spec:
+  order: 300
+---
+apiVersion: projectcalico.org/v3
+kind: Tier
+metadata:
+  name: security
+spec:
+  order: 200
+---
+apiVersion: projectcalico.org/v3
 kind: GlobalNetworkPolicy
 metadata:
   name: platform.allow-dns
@@ -38,23 +59,6 @@ spec:
         selector: k8s-app == "kube-dns"
         ports:
           - "53"
-  doNotTrack: false
-  applyOnForward: false
-  preDNAT: false
-  types:
-    - Ingress
-    - Egress
----
-apiVersion: projectcalico.org/v3
-kind: GlobalNetworkPolicy
-metadata:
-  name: default.default-deny
-spec:
-  tier: default
-  order: 0
-  selector: ""
-  namespaceSelector: ""
-  serviceAccountSelector: ""
   doNotTrack: false
   applyOnForward: false
   preDNAT: false
