@@ -1,0 +1,20 @@
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: security.global-trusted-domains
+spec:
+  tier: security
+  order: 112.5
+  selector: ""
+  namespaceSelector: ""
+  serviceAccountSelector: ""
+  egress:
+    - action: Allow
+      source: {}
+      destination:
+        selector: external-endpoints == "global-trusted"
+  doNotTrack: false
+  applyOnForward: false
+  preDNAT: false
+  types:
+    - Egress

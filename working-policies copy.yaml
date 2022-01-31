@@ -1,0 +1,1328 @@
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: platform.allow-dns
+spec:
+  tier: platform
+  order: -50
+  selector: ''
+  namespaceSelector: ''
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        ports:
+          - '53'
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        ports:
+          - '53'
+  egress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        ports:
+          - '53'
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        ports:
+          - '53'
+  doNotTrack: false
+  applyOnForward: false
+  preDNAT: false
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: default.default-deny
+spec:
+  tier: default
+  order: 0
+  selector: ''
+  namespaceSelector: ''
+  serviceAccountSelector: ''
+  doNotTrack: false
+  applyOnForward: false
+  preDNAT: false
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: security.pci-whitelist
+spec:
+  tier: security
+  order: 0
+  selector: all()
+  namespaceSelector: ''
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: app == "frontend"
+        ports:
+          - '8080'
+  egress:
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        ports:
+          - '53'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        ports:
+          - '53'
+  doNotTrack: false
+  applyOnForward: false
+  preDNAT: false
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-tigera.guardian-calico-cloud-egress
+  namespace: tigera-guardian
+spec:
+  tier: allow-tigera
+  order: 0.5
+  selector: k8s-app == "tigera-guardian"
+  serviceAccountSelector: ''
+  egress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        ports:
+          - '9000'
+        domains:
+          - '*.calicocloud.io'
+  types:
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-tigera.kube-controller-access
+  namespace: calico-system
+spec:
+  tier: allow-tigera
+  order: 1
+  selector: k8s-app == "calico-kube-controllers"
+  serviceAccountSelector: ''
+  egress:
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        namespaceSelector: projectcalico.org/name == "kube-system"
+        ports:
+          - '53'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        ports:
+          - '443'
+          - '6443'
+          - '12388'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: k8s-app == "tigera-guardian"
+        namespaceSelector: projectcalico.org/name == "tigera-guardian"
+        ports:
+          - '8080'
+  types:
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-tigera.kube-dns
+  namespace: kube-system
+spec:
+  tier: allow-tigera
+  order: 1
+  selector: k8s-app == "kube-dns"
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      source:
+        selector: >-
+          projectcalico.org/namespace in { "tigera-guardian",
+          "tigera-compliance", "tigera-dex", "tigera-elasticsearch",
+          "tigera-fluentd", "tigera-intrusion-detection", "tigera-kibana",
+          "tigera-manager", "tigera-prometheus", "tigera-skraper",
+          "tigera-system" }
+        namespaceSelector: all()
+      destination: {}
+    - action: Pass
+      source: {}
+      destination: {}
+  types:
+    - Ingress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-tigera.kube-dns-egress
+  namespace: kube-system
+spec:
+  tier: allow-tigera
+  order: 1
+  selector: k8s-app == "kube-dns"
+  serviceAccountSelector: ''
+  egress:
+    - action: Allow
+      source: {}
+      destination: {}
+  types:
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-tigera.compliance-access
+  namespace: tigera-compliance
+spec:
+  tier: allow-tigera
+  order: 1
+  selector: >-
+    k8s-app == "compliance-benchmarker"||k8s-app ==
+    "compliance-controller"||k8s-app == "compliance-snapshotter"||k8s-app ==
+    "compliance-reporter"
+  serviceAccountSelector: ''
+  egress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: >-
+          (provider == "kubernetes"&&component ==
+          "apiserver"&&endpoints.projectcalico.org/serviceName == "kubernetes")
+        namespaceSelector: projectcalico.org/name == "default"
+        ports:
+          - '443'
+          - '6443'
+          - '12388'
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        namespaceSelector: projectcalico.org/name == "kube-system"
+        ports:
+          - '53'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: k8s-app == "tigera-guardian"
+        namespaceSelector: projectcalico.org/name == "tigera-guardian"
+        ports:
+          - '8080'
+  types:
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-tigera.tigera-dpi
+  namespace: tigera-dpi
+spec:
+  tier: allow-tigera
+  order: 1
+  selector: k8s-app == "tigera-dpi"
+  serviceAccountSelector: ''
+  egress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        services:
+          name: kubernetes
+          namespace: default
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        services:
+          name: kube-dns
+          namespace: kube-system
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        services:
+          name: tigera-guardian
+          namespace: tigera-guardian
+  types:
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-tigera.allow-fluentd-node
+  namespace: tigera-fluentd
+spec:
+  tier: allow-tigera
+  order: 1
+  selector: k8s-app == "fluentd-node"
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: >-
+          (app.kubernetes.io/name == "prometheus"&&prometheus ==
+          "calico-node-prometheus")
+        namespaceSelector: projectcalico.org/name == "tigera-prometheus"
+      destination:
+        ports:
+          - '9081'
+  egress:
+    - action: Deny
+      protocol: TCP
+      source: {}
+      destination:
+        selector: k8s-app == "tigera-guardian"
+        namespaceSelector: projectcalico.org/name == "tigera-guardian"
+        notPorts:
+          - '8080'
+    - action: Allow
+      source: {}
+      destination: {}
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-tigera.guardian-access
+  namespace: tigera-guardian
+spec:
+  tier: allow-tigera
+  order: 1
+  selector: k8s-app == "tigera-guardian"
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: k8s-app == "fluentd-node"
+        namespaceSelector: projectcalico.org/name == "tigera-fluentd"
+      destination:
+        ports:
+          - '8080'
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: k8s-app == "compliance-benchmarker"
+        namespaceSelector: projectcalico.org/name == "tigera-compliance"
+      destination:
+        ports:
+          - '8080'
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: k8s-app == "compliance-reporter"
+        namespaceSelector: projectcalico.org/name == "tigera-compliance"
+      destination:
+        ports:
+          - '8080'
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: k8s-app == "compliance-snapshotter"
+        namespaceSelector: projectcalico.org/name == "tigera-compliance"
+      destination:
+        ports:
+          - '8080'
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: k8s-app == "compliance-controller"
+        namespaceSelector: projectcalico.org/name == "tigera-compliance"
+      destination:
+        ports:
+          - '8080'
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: k8s-app == "intrusion-detection-controller"
+        namespaceSelector: projectcalico.org/name == "tigera-intrusion-detection"
+      destination:
+        ports:
+          - '8080'
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: job-name == "intrusion-detection-es-job-installer"
+        namespaceSelector: projectcalico.org/name == "tigera-intrusion-detection"
+      destination:
+        ports:
+          - '8080'
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: k8s-app == "tigera-dpi"
+        namespaceSelector: projectcalico.org/name == "tigera-dpi"
+      destination:
+        ports:
+          - '8080'
+  egress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: k8s-app == "tigera-packetcapture"
+        namespaceSelector: projectcalico.org/name == "tigera-packetcapture"
+        ports:
+          - '8444'
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        namespaceSelector: projectcalico.org/name == "kube-system"
+        ports:
+          - '53'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: >-
+          (provider == "kubernetes"&&component ==
+          "apiserver"&&endpoints.projectcalico.org/serviceName == "kubernetes")
+        namespaceSelector: projectcalico.org/name == "default"
+        ports:
+          - '443'
+          - '6443'
+          - '12388'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: prometheus == "calico-node-prometheus"
+        namespaceSelector: projectcalico.org/name == "tigera-prometheus"
+        ports:
+          - '9090'
+          - '9095'
+    - action: Pass
+      source: {}
+      destination: {}
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-tigera.intrusion-detection-controller
+  namespace: tigera-intrusion-detection
+spec:
+  tier: allow-tigera
+  order: 1
+  selector: k8s-app == "intrusion-detection-controller"
+  serviceAccountSelector: ''
+  ingress:
+    - action: Deny
+      source: {}
+      destination: {}
+  egress:
+    - action: Deny
+      protocol: TCP
+      source: {}
+      destination:
+        nets:
+          - 169.254.0.0/16
+    - action: Deny
+      protocol: TCP
+      source: {}
+      destination:
+        nets:
+          - 'fe80::/10'
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        namespaceSelector: projectcalico.org/name == "kube-system"
+        ports:
+          - '53'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: k8s-app == "tigera-guardian"
+        namespaceSelector: projectcalico.org/name == "tigera-guardian"
+        ports:
+          - '8080'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: >-
+          (provider == "kubernetes"&&component ==
+          "apiserver"&&endpoints.projectcalico.org/serviceName == "kubernetes")
+        namespaceSelector: projectcalico.org/name == "default"
+        ports:
+          - '443'
+          - '6443'
+          - '12388'
+    - action: Pass
+      source: {}
+      destination: {}
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-tigera.tigera-packetcapture
+  namespace: tigera-packetcapture
+spec:
+  tier: allow-tigera
+  order: 1
+  selector: k8s-app == "tigera-packetcapture"
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: k8s-app == "tigera-guardian"
+        namespaceSelector: name == "tigera-guardian"
+      destination:
+        ports:
+          - '8444'
+  egress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: >-
+          (provider == "kubernetes"&&component ==
+          "apiserver"&&endpoints.projectcalico.org/serviceName == "kubernetes")
+        namespaceSelector: projectcalico.org/name == "default"
+        ports:
+          - '443'
+          - '6443'
+          - '12388'
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        namespaceSelector: projectcalico.org/name == "kube-system"
+        ports:
+          - '53'
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-tigera.calico-node-alertmanager
+  namespace: tigera-prometheus
+spec:
+  tier: allow-tigera
+  order: 1
+  selector: >-
+    (app.kubernetes.io/name == "alertmanager"&&alertmanager ==
+    "calico-node-alertmanager")
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        ports:
+          - '9093'
+          - '9094'
+  egress:
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        namespaceSelector: projectcalico.org/name == "kube-system"
+        ports:
+          - '53'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination: {}
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-tigera.calico-node-alertmanager-mesh
+  namespace: tigera-prometheus
+spec:
+  tier: allow-tigera
+  order: 1
+  selector: >-
+    (app.kubernetes.io/name == "alertmanager"&&alertmanager ==
+    "calico-node-alertmanager")
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: >-
+          (app.kubernetes.io/name == "alertmanager"&&alertmanager ==
+          "calico-node-alertmanager")
+        ports:
+          - '9094'
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        selector: >-
+          (app.kubernetes.io/name == "alertmanager"&&alertmanager ==
+          "calico-node-alertmanager")
+  egress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: >-
+          (app.kubernetes.io/name == "alertmanager"&&alertmanager ==
+          "calico-node-alertmanager")
+        ports:
+          - '9094'
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        selector: >-
+          (app.kubernetes.io/name == "alertmanager"&&alertmanager ==
+          "calico-node-alertmanager")
+        ports:
+          - '9094'
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        namespaceSelector: projectcalico.org/name == "kube-system"
+        ports:
+          - '53'
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-tigera.prometheus
+  namespace: tigera-prometheus
+spec:
+  tier: allow-tigera
+  order: 1
+  selector: >-
+    (app.kubernetes.io/name == "prometheus"&&prometheus ==
+    "calico-node-prometheus")
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        ports:
+          - '9090'
+          - '9095'
+  egress:
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        namespaceSelector: projectcalico.org/name == "kube-system"
+        ports:
+          - '53'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: >-
+          (provider == "kubernetes"&&component ==
+          "apiserver"&&endpoints.projectcalico.org/serviceName == "kubernetes")
+        namespaceSelector: projectcalico.org/name == "default"
+        ports:
+          - '443'
+          - '6443'
+          - '12388'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        ports:
+          - '9081'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        ports:
+          - '9900'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: >-
+          (app.kubernetes.io/name == "alertmanager"&&alertmanager ==
+          "calico-node-alertmanager")
+        ports:
+          - '9093'
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-tigera.prometheus-operator
+  namespace: tigera-prometheus
+spec:
+  tier: allow-tigera
+  order: 1
+  selector: operator == "prometheus"
+  serviceAccountSelector: ''
+  egress:
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        namespaceSelector: projectcalico.org/name == "kube-system"
+        ports:
+          - '53'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: >-
+          (provider == "kubernetes"&&component ==
+          "apiserver"&&endpoints.projectcalico.org/serviceName == "kubernetes")
+        namespaceSelector: projectcalico.org/name == "default"
+        ports:
+          - '443'
+          - '6443'
+          - '12388'
+  types:
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-tigera.tigera-prometheus-api
+  namespace: tigera-prometheus
+spec:
+  tier: allow-tigera
+  order: 1
+  selector: k8s-app == "tigera-prometheus-api"
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        ports:
+          - '9090'
+          - '9095'
+  egress:
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        namespaceSelector: projectcalico.org/name == "kube-system"
+        ports:
+          - '53'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: prometheus == "calico-node-prometheus"
+        namespaceSelector: projectcalico.org/name == "tigera-prometheus"
+        ports:
+          - '9090'
+          - '9095'
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-tigera.cnx-apiserver-access
+  namespace: tigera-system
+spec:
+  tier: allow-tigera
+  order: 1
+  selector: k8s-app == "tigera-apiserver"
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source:
+        nets:
+          - 0.0.0.0/0
+      destination:
+        ports:
+          - '443'
+          - '5443'
+          - '8080'
+          - '10443'
+  egress:
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        namespaceSelector: projectcalico.org/name == "kube-system"
+        ports:
+          - '53'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: >-
+          (provider == "kubernetes"&&component ==
+          "apiserver"&&endpoints.projectcalico.org/serviceName == "kubernetes")
+        namespaceSelector: projectcalico.org/name == "default"
+        ports:
+          - '443'
+          - '6443'
+          - '12388'
+    - action: Pass
+      source: {}
+      destination: {}
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: platform.tenant-hipstershop
+spec:
+  tier: platform
+  order: 50
+  selector: tenant == "hipstershop"
+  namespaceSelector: ''
+  serviceAccountSelector: ''
+  ingress:
+    - action: Pass
+      source: {}
+      destination: {}
+  egress:
+    - action: Pass
+      source: {}
+      destination: {}
+  doNotTrack: false
+  applyOnForward: false
+  preDNAT: false
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: platform.default-egress
+  namespace: default
+spec:
+  tier: platform
+  order: 75
+  selector: ''
+  serviceAccountSelector: ''
+  egress:
+    - action: Allow
+      source: {}
+      destination: {}
+  types:
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: security.pci-restriction
+spec:
+  tier: security
+  order: 75
+  selector: pci == "true"
+  namespaceSelector: ''
+  serviceAccountSelector: ''
+  ingress:
+    - action: Pass
+      source:
+        selector: pci == "true"
+      destination: {}
+    - action: Deny
+      source:
+        selector: pci != "true"
+      destination: {}
+  egress:
+    - action: Pass
+      source: {}
+      destination:
+        selector: pci == "true"
+    - action: Deny
+      source: {}
+      destination:
+        selector: pci != "true"
+  doNotTrack: false
+  applyOnForward: false
+  preDNAT: false
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: platform.platform-default-pass
+spec:
+  tier: platform
+  order: 100
+  selector: ''
+  namespaceSelector: ''
+  serviceAccountSelector: ''
+  ingress:
+    - action: Pass
+      source: {}
+      destination: {}
+  egress:
+    - action: Pass
+      source: {}
+      destination: {}
+  doNotTrack: false
+  applyOnForward: false
+  preDNAT: false
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: security.security-default-pass
+spec:
+  tier: security
+  order: 150
+  selector: ''
+  namespaceSelector: ''
+  serviceAccountSelector: ''
+  ingress:
+    - action: Pass
+      source: {}
+      destination: {}
+  egress:
+    - action: Pass
+      source: {}
+      destination: {}
+  doNotTrack: false
+  applyOnForward: false
+  preDNAT: false
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: app-hipstershop.checkoutservice
+  namespace: hipstershop
+spec:
+  tier: app-hipstershop
+  order: 650
+  selector: app == "checkoutservice"
+  serviceAccountSelector: ''
+  egress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        ports:
+          - '7070'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: app == "emailservice"
+        ports:
+          - '8080'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: app == "paymentservice"
+        ports:
+          - '50051'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: app == "productcatalogservice"
+        ports:
+          - '3550'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: app == "shippingservice"
+        ports:
+          - '50051'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: app == "currencyservice"
+        ports:
+          - '7000'
+  types:
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: app-hipstershop.cartservice
+  namespace: hipstershop
+spec:
+  tier: app-hipstershop
+  order: 875
+  selector: app == "cartservice"
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: app == "checkoutservice"
+      destination:
+        ports:
+          - '7070'
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: app == "frontend"
+      destination:
+        ports:
+          - '7070'
+  egress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: app == "redis-cart"
+        ports:
+          - '6379'
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: app-hipstershop.frontend
+  namespace: hipstershop
+spec:
+  tier: app-hipstershop
+  order: 1100
+  selector: app == "frontend"
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        ports:
+          - '8080'
+  egress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: app == "cartservice"
+        ports:
+          - '7070'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: app == "productcatalogservice"
+        ports:
+          - '3550'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: app == "recommendationservice"
+        ports:
+          - '8080'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: app == "currencyservice"
+        ports:
+          - '7000'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: app == "checkoutservice"
+        ports:
+          - '5050'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: app == "shippingservice"
+        ports:
+          - '50051'
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: app == "adservice"
+        ports:
+          - '9555'
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: app-hipstershop.redis-cart
+  namespace: hipstershop
+spec:
+  tier: app-hipstershop
+  order: 1300
+  selector: app == "redis-cart"
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: app == "cartservice"
+      destination:
+        ports:
+          - '6379'
+  types:
+    - Ingress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: app-hipstershop.productcatalogservice
+  namespace: hipstershop
+spec:
+  tier: app-hipstershop
+  order: 1400
+  selector: app == "productcatalogservice"
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: app == "checkoutservice"
+      destination:
+        ports:
+          - '3550'
+  types:
+    - Ingress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: app-hipstershop.emailservice
+  namespace: hipstershop
+spec:
+  tier: app-hipstershop
+  order: 1500
+  selector: app == "emailservice"
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: app == "checkoutservice"
+      destination:
+        ports:
+          - '8080'
+  types:
+    - Ingress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: app-hipstershop.paymentservice
+  namespace: hipstershop
+spec:
+  tier: app-hipstershop
+  order: 1600
+  selector: app == "paymentservice"
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: app == "checkoutservice"
+      destination:
+        ports:
+          - '50051'
+  types:
+    - Ingress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: app-hipstershop.currencyservice
+  namespace: hipstershop
+spec:
+  tier: app-hipstershop
+  order: 1650
+  selector: app == "currencyservice"
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: app == "checkoutservice"
+      destination:
+        ports:
+          - '7000'
+  types:
+    - Ingress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: app-hipstershop.shippingservice
+  namespace: hipstershop
+spec:
+  tier: app-hipstershop
+  order: 1700
+  selector: app == "shippingservice"
+  serviceAccountSelector: ''
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source:
+        selector: app == "checkoutservice"
+      destination:
+        ports:
+          - '50051'
+  types:
+    - Ingress
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: tigera-security.block-alienvault-ipthreatfeed
+spec:
+  tier: tigera-security
+  selector: all()
+  namespaceSelector: ''
+  serviceAccountSelector: ''
+  egress:
+    - action: Deny
+      source: {}
+      destination:
+        selector: feed == "otx-ipthreatfeed"
+    - action: Pass
+      source: {}
+      destination: {}
+  doNotTrack: false
+  applyOnForward: false
+  preDNAT: false
+  types:
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-tigera.default-deny
+  namespace: tigera-compliance
+spec:
+  tier: allow-tigera
+  selector: all()
+  serviceAccountSelector: ''
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-tigera.default-deny
+  namespace: tigera-guardian
+spec:
+  tier: allow-tigera
+  selector: all()
+  serviceAccountSelector: ''
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-tigera.default-deny
+  namespace: tigera-intrusion-detection
+spec:
+  tier: allow-tigera
+  selector: all()
+  serviceAccountSelector: ''
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: NetworkPolicy
+metadata:
+  name: allow-tigera.default-deny
+  namespace: tigera-prometheus
+spec:
+  tier: allow-tigera
+  selector: all()
+  serviceAccountSelector: ''
+  types:
+    - Ingress
+    - Egress

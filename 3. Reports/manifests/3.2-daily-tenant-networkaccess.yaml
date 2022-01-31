@@ -1,0 +1,9 @@
+apiVersion: projectcalico.org/v3
+kind: GlobalReport
+metadata:
+  name: daily-tenant-hipstershop-networkaccess
+spec:
+  reportType: network-access
+  endpoints:
+    selector: tenant=hipstershop
+  schedule: 0 0 * * *
