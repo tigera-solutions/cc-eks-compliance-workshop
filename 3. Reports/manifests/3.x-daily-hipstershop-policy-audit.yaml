@@ -1,0 +1,11 @@
+apiVersion: projectcalico.org/v3
+kind: GlobalReport
+metadata:
+  name: daily-hipstershop-policy-audit-report
+spec:
+  reportType: policy-audit
+  endpoints:
+    namespaces:
+      names:
+        - hipstershop
+  schedule: 0 0 * * *
