@@ -1,0 +1,3 @@
+
+      startTime,endTime,endpointSelector,namespaceNames,namespaceSelector,serviceAccountNames,serviceAccountSelectors,endpointsNumIngressProtected,endpointsNumEgressProtected,endpointsNumIngressUnprotected,endpointsNumEgressUnprotected,endpointsNumIngressFromInternet,endpointsNumEgressToInternet,endpointsNumIngressFromOtherNamespace,endpointsNumEgressToOtherNamespace,endpointsNumEnvoyEnabled
+2022-02-13T00:00:00Z,2022-02-14T00:00:00Z,tenant == "hipstershop",,,,,13,13,0,0,13,0,13,13,0

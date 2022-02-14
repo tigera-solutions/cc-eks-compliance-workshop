@@ -1,0 +1,4 @@
+node,version,status,testsPassing,testsFailing,testsUnknown,testsTotal
+k8s-ce-c1,,MED,43,42,30,85
+k8s-ce-w1,,LOW,6,16,2,22
+k8s-ce-w2,,LOW,6,16,2,22

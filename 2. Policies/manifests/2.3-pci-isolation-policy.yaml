@@ -6,8 +6,8 @@ spec:
   tier: security
   order: 0
   selector: all()
-  namespaceSelector: ''
-  serviceAccountSelector: ''
+  namespaceSelector: ""
+  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -15,7 +15,7 @@ spec:
       destination:
         selector: app == "frontend"
         ports:
-          - '8080'
+          - "8080"
   egress:
     - action: Allow
       protocol: UDP
@@ -23,14 +23,14 @@ spec:
       destination:
         selector: k8s-app == "kube-dns"
         ports:
-          - '53'
+          - "53"
     - action: Allow
       protocol: TCP
       source: {}
       destination:
         selector: k8s-app == "kube-dns"
         ports:
-          - '53'
+          - "53"
   doNotTrack: false
   applyOnForward: false
   preDNAT: false
@@ -41,13 +41,13 @@ spec:
 apiVersion: projectcalico.org/v3
 kind: GlobalNetworkPolicy
 metadata:
-  name: security.pci-restriction
+  name: security.pci-restrict
 spec:
   tier: security
   order: 75
   selector: pci == "true"
-  namespaceSelector: ''
-  serviceAccountSelector: ''
+  namespaceSelector: ""
+  serviceAccountSelector: ""
   ingress:
     - action: Allow
       source:

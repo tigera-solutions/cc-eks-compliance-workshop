@@ -7,7 +7,6 @@ spec:
   tier: app-hipstershop
   order: 650
   selector: app == "checkoutservice"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -72,7 +71,6 @@ spec:
   tier: app-hipstershop
   order: 875
   selector: app == "cartservice"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -102,7 +100,6 @@ spec:
   tier: app-hipstershop
   order: 1100
   selector: app == "frontend"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -173,7 +170,6 @@ spec:
   tier: app-hipstershop
   order: 1300
   selector: app == "redis-cart"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -194,7 +190,6 @@ spec:
   tier: app-hipstershop
   order: 1400
   selector: app == "productcatalogservice"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -217,7 +212,6 @@ spec:
   tier: app-hipstershop
   order: 1500
   selector: app == "emailservice"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -238,7 +232,6 @@ spec:
   tier: app-hipstershop
   order: 1600
   selector: app == "paymentservice"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -259,7 +252,6 @@ spec:
   tier: app-hipstershop
   order: 1650
   selector: app == "currencyservice"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -280,7 +272,6 @@ spec:
   tier: app-hipstershop
   order: 1700
   selector: app == "shippingservice"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -301,7 +292,6 @@ spec:
   tier: app-hipstershop
   order: 1800
   selector: app == "recommendationservice"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -331,7 +321,6 @@ spec:
   tier: app-hipstershop
   order: 1900
   selector: app == "adservice"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -352,7 +341,6 @@ spec:
   tier: app-hipstershop
   order: 2000
   selector: app == "loadgenerator"
-  serviceAccountSelector: ""
   egress:
     - action: Allow
       protocol: TCP

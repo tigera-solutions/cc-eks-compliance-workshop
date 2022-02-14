@@ -28,7 +28,6 @@ spec:
   order: -50
   selector: ""
   namespaceSelector: ""
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -75,7 +74,6 @@ spec:
   order: 0
   selector: all()
   namespaceSelector: ""
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -115,7 +113,6 @@ spec:
   order: 50
   selector: tenant == "hipstershop"
   namespaceSelector: ""
-  serviceAccountSelector: ""
   ingress:
     - action: Pass
       source: {}
@@ -140,7 +137,6 @@ spec:
   tier: platform
   order: 75
   selector: ""
-  serviceAccountSelector: ""
   egress:
     - action: Allow
       source: {}
@@ -157,7 +153,6 @@ spec:
   order: 75
   selector: pci == "true"
   namespaceSelector: ""
-  serviceAccountSelector: ""
   ingress:
     - action: Pass
       source:
@@ -192,7 +187,6 @@ spec:
   order: 100
   selector: ""
   namespaceSelector: ""
-  serviceAccountSelector: ""
   ingress:
     - action: Pass
       source: {}
@@ -217,7 +211,6 @@ spec:
   order: 112.5
   selector: ""
   namespaceSelector: ""
-  serviceAccountSelector: ""
   egress:
     - action: Allow
       source: {}
@@ -238,7 +231,6 @@ spec:
   order: 150
   selector: ""
   namespaceSelector: ""
-  serviceAccountSelector: ""
   ingress:
     - action: Pass
       source: {}
@@ -263,7 +255,6 @@ spec:
   tier: app-hipstershop
   order: 650
   selector: app == "checkoutservice"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -328,7 +319,6 @@ spec:
   tier: app-hipstershop
   order: 875
   selector: app == "cartservice"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -358,7 +348,6 @@ spec:
   tier: app-hipstershop
   order: 1100
   selector: app == "frontend"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -429,7 +418,6 @@ spec:
   tier: app-hipstershop
   order: 1300
   selector: app == "redis-cart"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -450,7 +438,6 @@ spec:
   tier: app-hipstershop
   order: 1400
   selector: app == "productcatalogservice"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -473,7 +460,6 @@ spec:
   tier: app-hipstershop
   order: 1500
   selector: app == "emailservice"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -494,7 +480,6 @@ spec:
   tier: app-hipstershop
   order: 1600
   selector: app == "paymentservice"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -515,7 +500,6 @@ spec:
   tier: app-hipstershop
   order: 1650
   selector: app == "currencyservice"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -536,7 +520,6 @@ spec:
   tier: app-hipstershop
   order: 1700
   selector: app == "shippingservice"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -557,7 +540,6 @@ spec:
   tier: app-hipstershop
   order: 1800
   selector: app == "recommendationservice"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -587,7 +569,6 @@ spec:
   tier: app-hipstershop
   order: 1900
   selector: app == "adservice"
-  serviceAccountSelector: ""
   ingress:
     - action: Allow
       protocol: TCP
@@ -608,7 +589,6 @@ spec:
   tier: app-hipstershop
   order: 2000
   selector: app == "loadgenerator"
-  serviceAccountSelector: ""
   egress:
     - action: Allow
       protocol: TCP

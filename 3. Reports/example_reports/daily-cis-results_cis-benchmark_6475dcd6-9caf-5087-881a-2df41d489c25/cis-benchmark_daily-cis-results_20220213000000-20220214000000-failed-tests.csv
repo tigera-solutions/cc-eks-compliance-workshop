@@ -1,0 +1,464 @@
+nodeName,testIndex,testDescription,status,scored,remediation
+k8s-ce-c1,1.1.6,Ensure that the --insecure-port argument is set to 0 (Scored),FAIL,true,"Edit the API server pod specification file /etc/kubernetes/manifests/kube-apiserver.yaml
+apiserver.yaml on the master node and set the below parameter.
+--insecure-port=0
+"
+k8s-ce-c1,1.1.8,Ensure that the --profiling argument is set to false (Scored),FAIL,true,"Edit the API server pod specification file /etc/kubernetes/manifests/kube-apiserver.yaml
+on the master node and set the below parameter.
+--profiling=false
+"
+k8s-ce-c1,1.1.9,Ensure that the --repair-malformed-updates argument is set to false (Scored),FAIL,true,"Edit the API server pod specification file /etc/kubernetes/manifests/kube-apiserver.yaml
+on the master node and set the below parameter.
+--repair-malformed-updates=false
+"
+k8s-ce-c1,1.1.11,Ensure that the admission control plugin AlwaysPullImages is set (Scored),FAIL,true,"Edit the API server pod specification file /etc/kubernetes/manifests/kube-apiserver.yaml
+on the master node and set the --enable-admission-plugins to
+include AlwaysPullImages.
+--enable-admission-plugins=...,AlwaysPullImages,...
+"
+k8s-ce-c1,1.1.12,Ensure that the admission control plugin DenyEscalatingExec is set (Scored),FAIL,true,"Edit the API server pod specification file /etc/kubernetes/manifests/kube-apiserver.yaml
+on the master node and set the --enable-admission-plugins parameter to a
+value that includes DenyEscalatingExec.
+--enable-admission-plugins=...,DenyEscalatingExec,...
+"
+k8s-ce-c1,1.1.15,Ensure that the --audit-log-path argument is set as appropriate (Scored),FAIL,true,"Edit the API server pod specification file /etc/kubernetes/manifests/kube-apiserver.yaml
+on the master node and set the --audit-log-path parameter to a suitable
+path and file where you would like audit logs to be written, for example:
+--audit-log-path=/var/log/apiserver/audit.log
+"
+k8s-ce-c1,1.1.16,Ensure that the --audit-log-maxage argument is set to 30 or as appropriate (Scored),FAIL,true,"Edit the API server pod specification file /etc/kubernetes/manifests/kube-apiserver.yaml
+on the master node and set the --audit-log-maxage parameter to 30 or
+as an appropriate number of days: --audit-log-maxage=30
+"
+k8s-ce-c1,1.1.17,Ensure that the --audit-log-maxbackup argument is set to 10 or as appropriate (Scored),FAIL,true,"Edit the API server pod specification file /etc/kubernetes/manifests/kube-apiserver.yaml
+on the master node and set the --audit-log-maxbackup parameter to 10
+or to an appropriate value.
+--audit-log-maxbackup=10
+"
+k8s-ce-c1,1.1.18,Ensure that the --audit-log-maxsize argument is set to 100 or as appropriate (Scored),FAIL,true,"Edit the API server pod specification file /etc/kubernetes/manifests/kube-apiserver.yaml
+on the master node and set the --audit-log-maxsize parameter to an
+appropriate size in MB. For example, to set it as 100 MB:
+--audit-log-maxsize=100
+"
+k8s-ce-c1,1.1.21,Ensure that the --kubelet-certificate-authority argument is set as appropriate (Scored),FAIL,true,"Follow the Kubernetes documentation and setup the TLS connection between the
+apiserver and kubelets. Then, edit the API server pod specification file
+/etc/kubernetes/manifests/kube-apiserver.yaml on the master node and set the --kubelet-certificate-authority
+parameter to the path to the cert file for the certificate authority.
+--kubelet-certificate-authority=<ca-string>
+"
+k8s-ce-c1,1.1.24,Ensure that the admission control plugin PodSecurityPolicy is set (Scored),FAIL,true,"Follow the documentation and create Pod Security Policy objects as per your environment.
+Then, edit the API server pod specification file /etc/kubernetes/manifests/kube-apiserver.yaml
+on the master node and set the --enable-admission-plugins parameter to a
+value that includes PodSecurityPolicy :
+--enable-admission-plugins=...,PodSecurityPolicy,...
+Then restart the API Server.
+"
+k8s-ce-c1,1.1.27,Ensure that the admission control plugin ServiceAccount is set(Scored),FAIL,true,"Follow the documentation and create ServiceAccount objects as per your environment.
+Then, edit the API server pod specification file /etc/kubernetes/manifests/kube-apiserver.yaml
+on the master node and set the --enable-admission-plugins parameter to a
+value that includes ServiceAccount.
+--enable-admission-plugins=...,ServiceAccount,...
+"
+k8s-ce-c1,1.1.34,Ensure that the --experimental-encryption-provider-config argument is set as appropriate (Scored),FAIL,true,"Follow the Kubernetes documentation and configure a EncryptionConfig file.
+Then, edit the API server pod specification file /etc/kubernetes/manifests/kube-apiserver.yaml on the
+master node and set the --experimental-encryption-provider-config parameter
+to the path of that file:
+--experimental-encryption-provider-config=</path/to/EncryptionConfig/File>
+"
+k8s-ce-c1,1.1.36,Ensure that the admission control plugin EventRateLimit is set (Scored),FAIL,true,"Follow the Kubernetes documentation and set the desired limits in a
+configuration file. Then, edit the API server pod specification file
+/etc/kubernetes/manifests/kube-apiserver.yaml and set the below parameters.
+--enable-admission-plugins=...,EventRateLimit,...
+--admission-control-config-file=<path/to/configuration/file>
+"
+k8s-ce-c1,1.2.1,Ensure that the --profiling argument is set to false (Scored),FAIL,true,"Edit the Scheduler pod specification file /etc/kubernetes/manifests/kube-scheduler.yaml
+file on the master node and set the below parameter.
+--profiling=false
+"
+k8s-ce-c1,1.3.1,Ensure that the --terminated-pod-gc-threshold argument is set as appropriate (Scored),FAIL,true,"Edit the Controller Manager pod specification file /etc/kubernetes/manifests/kube-controller-manager.yaml
+on the master node and set the --terminated-pod-gc-threshold to an appropriate threshold, for example:
+--terminated-pod-gc-threshold=10
+"
+k8s-ce-c1,1.3.2,Ensure that the --profiling argument is set to false (Scored),FAIL,true,"Edit the Controller Manager pod specification file /etc/kubernetes/manifests/kube-controller-manager.yaml
+on the master node and set the below parameter.
+--profiling=false
+"
+k8s-ce-c1,1.3.6,Ensure that the RotateKubeletServerCertificate argument is set to true (Scored),FAIL,true,"Edit the Controller Manager pod specification file /etc/kubernetes/manifests/kube-controller-manager.yaml
+controller-manager.yaml on the master node and set the --feature-gates parameter to
+include RotateKubeletServerCertificate=true.
+--feature-gates=RotateKubeletServerCertificate=true
+"
+k8s-ce-c1,1.4.2,Ensure that the API server pod specification file ownership is set to root:root (Scored),FAIL,true,"Run the below command (based on the file location on your system) on the master node.
+For example,
+chown root:root /etc/kubernetes/manifests/kube-apiserver.yaml
+"
+k8s-ce-c1,1.4.4,Ensure that the controller manager pod specification file ownership is set to root:root (Scored),FAIL,true,"Run the below command (based on the file location on your system) on the master node.
+For example,
+chown root:root /etc/kubernetes/manifests/kube-controller-manager.yaml
+"
+k8s-ce-c1,1.4.6,Ensure that the scheduler pod specification file ownership is set to root:root (Scored),FAIL,true,"Run the below command (based on the file location on your system) on the master node.
+For example,
+chown root:root /etc/kubernetes/manifests/kube-scheduler.yaml
+"
+k8s-ce-c1,1.4.8,Ensure that the etcd pod specification file ownership is set to root:root (Scored),FAIL,true,"Run the below command (based on the file location on your system) on the master node.
+For example,
+chown root:root /etc/kubernetes/manifests/etcd.yaml
+"
+k8s-ce-c1,1.4.12,Ensure that the etcd data directory ownership is set to etcd:etcd (Scored),FAIL,true,"On the etcd server node, get the etcd data directory, passed as an argument --data-dir ,
+from the below command:
+ps -ef | grep etcd
+Run the below command (based on the etcd data directory found above). For example,
+chown etcd:etcd /var/lib/etcd
+"
+k8s-ce-c1,1.4.14,Ensure that the admin.conf file ownership is set to root:root (Scored),FAIL,true,"Run the below command (based on the file location on your system) on the master node.
+For example,
+chown root:root /etc/kubernetes/admin.conf
+"
+k8s-ce-c1,1.4.16,Ensure that the scheduler.conf file ownership is set to root:root (Scored),FAIL,true,"Run the below command (based on the file location on your system) on the
+master node. For example, chown root:root /etc/kubernetes/scheduler.conf
+"
+k8s-ce-c1,1.4.18,Ensure that the controller-manager.conf file ownership is set to root:root (Scored),FAIL,true,"Run the below command (based on the file location on your system) on the
+master node. For example, chown root:root /etc/kubernetes/controller-manager.conf
+"
+k8s-ce-c1,2.1.1,Ensure that the --anonymous-auth argument is set to false (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set authentication: anonymous: enabled to
+false .
+If using executable arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameter in KUBELET_SYSTEM_PODS_ARGS variable.
+--anonymous-auth=false
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-c1,2.1.2,Ensure that the --authorization-mode argument is not set to AlwaysAllow (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set authorization: mode to Webhook.
+If using executable arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameter in KUBELET_AUTHZ_ARGS variable.
+--authorization-mode=Webhook
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-c1,2.1.3,Ensure that the --client-ca-file argument is set as appropriate (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set authentication: x509: clientCAFile to
+the location of the client CA file.
+If using command line arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameter in KUBELET_AUTHZ_ARGS variable.
+--client-ca-file=<path/to/client-ca-file>
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-c1,2.1.4,Ensure that the --read-only-port argument is set to 0 (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set readOnlyPort to 0 .
+If using command line arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameter in KUBELET_SYSTEM_PODS_ARGS variable.
+--read-only-port=0
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-c1,2.1.5,Ensure that the --streaming-connection-idle-timeout argument is not set to 0 (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set streamingConnectionIdleTimeout to a
+value other than 0.
+If using command line arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameter in KUBELET_SYSTEM_PODS_ARGS variable.
+--streaming-connection-idle-timeout=5m
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-c1,2.1.6,Ensure that the --protect-kernel-defaults argument is set to true (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set protectKernelDefaults: true .
+If using command line arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameter in KUBELET_SYSTEM_PODS_ARGS variable.
+--protect-kernel-defaults=true
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-c1,2.1.9,Ensure that the --event-qps argument is set to 0 (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set eventRecordQPS: 0 .
+If using command line arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameter in KUBELET_SYSTEM_PODS_ARGS variable.
+--event-qps=0
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-c1,2.1.10,Ensure that the --tls-cert-file and --tls-private-key-file arguments are set as appropriate (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set tlsCertFile to the location of the certificate
+file to use to identify this Kubelet, and tlsPrivateKeyFile to the location of the
+corresponding private key file.
+If using command line arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameters in KUBELET_CERTIFICATE_ARGS variable.
+--tls-cert-file=<path/to/tls-certificate-file>
+file=<path/to/tls-key-file>
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-c1,2.1.12,Ensure that the --rotate-certificates argument is not set to false (Scored),FAIL,true,"If using a Kubelet config file, edit the file to add the line rotateCertificates: true.
+If using command line arguments, edit the kubelet service file /etc/systemd/system/kubelet.service.d/10-kubeadm.conf 
+on each worker node and add --rotate-certificates=true argument to the KUBELET_CERTIFICATE_ARGS variable.
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-c1,2.1.13,Ensure that the RotateKubeletServerCertificate argument is set to true (Scored),FAIL,true,"Edit the kubelet service file /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+on each worker node and set the below parameter in KUBELET_CERTIFICATE_ARGS variable.
+--feature-gates=RotateKubeletServerCertificate=true
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-c1,2.2.2,Ensure that the kubelet.conf file ownership is set to root:root (Scored),FAIL,true,"Run the below command (based on the file location on your system) on the each worker
+node. For example,
+chown root:root /etc/kubernetes/kubelet.conf
+"
+k8s-ce-c1,2.2.4,Ensure that the kubelet service file ownership is set to root:root (Scored),FAIL,true,"Run the below command (based on the file location on your system) on the each worker
+node. For example,
+chown root:root /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+"
+k8s-ce-c1,2.2.5,Ensure that the proxy kubeconfig file permissions are set to 644 or more restrictive (Scored),FAIL,true,"Run the below command (based on the file location on your system) on the each worker
+node. For example,
+chmod 644 /etc/kubernetes/proxy.conf
+"
+k8s-ce-c1,2.2.6,Ensure that the proxy kubeconfig file ownership is set to root:root (Scored),FAIL,true,"Run the below command (based on the file location on your system) on the each worker
+node. For example,
+chown root:root /etc/kubernetes/proxy.conf
+"
+k8s-ce-c1,2.2.8,Ensure that the client certificate authorities file ownership is set to root:root (Scored),FAIL,true,"Run the following command to modify the ownership of the --client-ca-file .
+chown root:root <filename>
+"
+k8s-ce-c1,2.2.9,Ensure that the kubelet configuration file ownership is set to root:root (Scored),FAIL,true,"Run the following command (using the config file location identied in the Audit step)
+chown root:root /var/lib/kubelet/config.yaml
+"
+k8s-ce-w1,2.1.1,Ensure that the --anonymous-auth argument is set to false (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set authentication: anonymous: enabled to
+false .
+If using executable arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameter in KUBELET_SYSTEM_PODS_ARGS variable.
+--anonymous-auth=false
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-w1,2.1.2,Ensure that the --authorization-mode argument is not set to AlwaysAllow (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set authorization: mode to Webhook.
+If using executable arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameter in KUBELET_AUTHZ_ARGS variable.
+--authorization-mode=Webhook
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-w1,2.1.3,Ensure that the --client-ca-file argument is set as appropriate (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set authentication: x509: clientCAFile to
+the location of the client CA file.
+If using command line arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameter in KUBELET_AUTHZ_ARGS variable.
+--client-ca-file=<path/to/client-ca-file>
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-w1,2.1.4,Ensure that the --read-only-port argument is set to 0 (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set readOnlyPort to 0 .
+If using command line arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameter in KUBELET_SYSTEM_PODS_ARGS variable.
+--read-only-port=0
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-w1,2.1.5,Ensure that the --streaming-connection-idle-timeout argument is not set to 0 (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set streamingConnectionIdleTimeout to a
+value other than 0.
+If using command line arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameter in KUBELET_SYSTEM_PODS_ARGS variable.
+--streaming-connection-idle-timeout=5m
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-w1,2.1.6,Ensure that the --protect-kernel-defaults argument is set to true (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set protectKernelDefaults: true .
+If using command line arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameter in KUBELET_SYSTEM_PODS_ARGS variable.
+--protect-kernel-defaults=true
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-w1,2.1.9,Ensure that the --event-qps argument is set to 0 (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set eventRecordQPS: 0 .
+If using command line arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameter in KUBELET_SYSTEM_PODS_ARGS variable.
+--event-qps=0
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-w1,2.1.10,Ensure that the --tls-cert-file and --tls-private-key-file arguments are set as appropriate (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set tlsCertFile to the location of the certificate
+file to use to identify this Kubelet, and tlsPrivateKeyFile to the location of the
+corresponding private key file.
+If using command line arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameters in KUBELET_CERTIFICATE_ARGS variable.
+--tls-cert-file=<path/to/tls-certificate-file>
+file=<path/to/tls-key-file>
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-w1,2.1.12,Ensure that the --rotate-certificates argument is not set to false (Scored),FAIL,true,"If using a Kubelet config file, edit the file to add the line rotateCertificates: true.
+If using command line arguments, edit the kubelet service file /etc/systemd/system/kubelet.service.d/10-kubeadm.conf 
+on each worker node and add --rotate-certificates=true argument to the KUBELET_CERTIFICATE_ARGS variable.
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-w1,2.1.13,Ensure that the RotateKubeletServerCertificate argument is set to true (Scored),FAIL,true,"Edit the kubelet service file /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+on each worker node and set the below parameter in KUBELET_CERTIFICATE_ARGS variable.
+--feature-gates=RotateKubeletServerCertificate=true
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-w1,2.2.2,Ensure that the kubelet.conf file ownership is set to root:root (Scored),FAIL,true,"Run the below command (based on the file location on your system) on the each worker
+node. For example,
+chown root:root /etc/kubernetes/kubelet.conf
+"
+k8s-ce-w1,2.2.4,Ensure that the kubelet service file ownership is set to root:root (Scored),FAIL,true,"Run the below command (based on the file location on your system) on the each worker
+node. For example,
+chown root:root /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+"
+k8s-ce-w1,2.2.5,Ensure that the proxy kubeconfig file permissions are set to 644 or more restrictive (Scored),FAIL,true,"Run the below command (based on the file location on your system) on the each worker
+node. For example,
+chmod 644 /etc/kubernetes/proxy.conf
+"
+k8s-ce-w1,2.2.6,Ensure that the proxy kubeconfig file ownership is set to root:root (Scored),FAIL,true,"Run the below command (based on the file location on your system) on the each worker
+node. For example,
+chown root:root /etc/kubernetes/proxy.conf
+"
+k8s-ce-w1,2.2.8,Ensure that the client certificate authorities file ownership is set to root:root (Scored),FAIL,true,"Run the following command to modify the ownership of the --client-ca-file .
+chown root:root <filename>
+"
+k8s-ce-w1,2.2.9,Ensure that the kubelet configuration file ownership is set to root:root (Scored),FAIL,true,"Run the following command (using the config file location identied in the Audit step)
+chown root:root /var/lib/kubelet/config.yaml
+"
+k8s-ce-w2,2.1.1,Ensure that the --anonymous-auth argument is set to false (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set authentication: anonymous: enabled to
+false .
+If using executable arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameter in KUBELET_SYSTEM_PODS_ARGS variable.
+--anonymous-auth=false
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-w2,2.1.2,Ensure that the --authorization-mode argument is not set to AlwaysAllow (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set authorization: mode to Webhook.
+If using executable arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameter in KUBELET_AUTHZ_ARGS variable.
+--authorization-mode=Webhook
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-w2,2.1.3,Ensure that the --client-ca-file argument is set as appropriate (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set authentication: x509: clientCAFile to
+the location of the client CA file.
+If using command line arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameter in KUBELET_AUTHZ_ARGS variable.
+--client-ca-file=<path/to/client-ca-file>
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-w2,2.1.4,Ensure that the --read-only-port argument is set to 0 (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set readOnlyPort to 0 .
+If using command line arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameter in KUBELET_SYSTEM_PODS_ARGS variable.
+--read-only-port=0
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-w2,2.1.5,Ensure that the --streaming-connection-idle-timeout argument is not set to 0 (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set streamingConnectionIdleTimeout to a
+value other than 0.
+If using command line arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameter in KUBELET_SYSTEM_PODS_ARGS variable.
+--streaming-connection-idle-timeout=5m
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-w2,2.1.6,Ensure that the --protect-kernel-defaults argument is set to true (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set protectKernelDefaults: true .
+If using command line arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameter in KUBELET_SYSTEM_PODS_ARGS variable.
+--protect-kernel-defaults=true
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-w2,2.1.9,Ensure that the --event-qps argument is set to 0 (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set eventRecordQPS: 0 .
+If using command line arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameter in KUBELET_SYSTEM_PODS_ARGS variable.
+--event-qps=0
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-w2,2.1.10,Ensure that the --tls-cert-file and --tls-private-key-file arguments are set as appropriate (Scored),FAIL,true,"If using a Kubelet config file, edit the file to set tlsCertFile to the location of the certificate
+file to use to identify this Kubelet, and tlsPrivateKeyFile to the location of the
+corresponding private key file.
+If using command line arguments, edit the kubelet service file
+/etc/systemd/system/kubelet.service.d/10-kubeadm.conf on each worker node and
+set the below parameters in KUBELET_CERTIFICATE_ARGS variable.
+--tls-cert-file=<path/to/tls-certificate-file>
+file=<path/to/tls-key-file>
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-w2,2.1.12,Ensure that the --rotate-certificates argument is not set to false (Scored),FAIL,true,"If using a Kubelet config file, edit the file to add the line rotateCertificates: true.
+If using command line arguments, edit the kubelet service file /etc/systemd/system/kubelet.service.d/10-kubeadm.conf 
+on each worker node and add --rotate-certificates=true argument to the KUBELET_CERTIFICATE_ARGS variable.
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-w2,2.1.13,Ensure that the RotateKubeletServerCertificate argument is set to true (Scored),FAIL,true,"Edit the kubelet service file /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+on each worker node and set the below parameter in KUBELET_CERTIFICATE_ARGS variable.
+--feature-gates=RotateKubeletServerCertificate=true
+Based on your system, restart the kubelet service. For example:
+systemctl daemon-reload
+systemctl restart kubelet.service
+"
+k8s-ce-w2,2.2.2,Ensure that the kubelet.conf file ownership is set to root:root (Scored),FAIL,true,"Run the below command (based on the file location on your system) on the each worker
+node. For example,
+chown root:root /etc/kubernetes/kubelet.conf
+"
+k8s-ce-w2,2.2.4,Ensure that the kubelet service file ownership is set to root:root (Scored),FAIL,true,"Run the below command (based on the file location on your system) on the each worker
+node. For example,
+chown root:root /etc/systemd/system/kubelet.service.d/10-kubeadm.conf
+"
+k8s-ce-w2,2.2.5,Ensure that the proxy kubeconfig file permissions are set to 644 or more restrictive (Scored),FAIL,true,"Run the below command (based on the file location on your system) on the each worker
+node. For example,
+chmod 644 /etc/kubernetes/proxy.conf
+"
+k8s-ce-w2,2.2.6,Ensure that the proxy kubeconfig file ownership is set to root:root (Scored),FAIL,true,"Run the below command (based on the file location on your system) on the each worker
+node. For example,
+chown root:root /etc/kubernetes/proxy.conf
+"
+k8s-ce-w2,2.2.8,Ensure that the client certificate authorities file ownership is set to root:root (Scored),FAIL,true,"Run the following command to modify the ownership of the --client-ca-file .
+chown root:root <filename>
+"
+k8s-ce-w2,2.2.9,Ensure that the kubelet configuration file ownership is set to root:root (Scored),FAIL,true,"Run the following command (using the config file location identied in the Audit step)
+chown root:root /var/lib/kubelet/config.yaml
+"

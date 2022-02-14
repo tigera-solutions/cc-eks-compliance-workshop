@@ -1,7 +1,7 @@
 apiVersion: projectcalico.org/v3
 kind: GlobalNetworkPolicy
 metadata:
-  name: security.pci-restriction
+  name: security.pci-restrict
 spec:
   tier: security
   order: 75
