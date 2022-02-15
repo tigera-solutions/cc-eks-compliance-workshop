@@ -248,7 +248,7 @@ kubectl apply -f -<<EOF
 apiVersion: projectcalico.org/v3
 kind: GlobalNetworkPolicy
 metadata:
-  name: security.pci-whitelist
+  name: security.pci-allowlist
 spec:
   tier: security
   order: 0

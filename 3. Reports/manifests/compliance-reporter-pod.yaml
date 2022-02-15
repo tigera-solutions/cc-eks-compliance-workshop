@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Pod
 metadata:
-  name: run-reporter-weekly-full-infrastructure-inventory
+  name: run-reporter-hourly-inventory-report
   namespace: tigera-compliance
   labels:
     k8s-app: compliance-reporter
@@ -27,7 +27,7 @@ spec:
         # Modify this value with name of an existing globalreport resource.
         # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         - name: TIGERA_COMPLIANCE_REPORT_NAME
-          value: weekly-full-infrastructure-inventory
+          value: hourly-inventory-report
           # Modify these values with the start and end time frame that should be reported on.
           # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
         - name: TIGERA_COMPLIANCE_REPORT_START_TIME

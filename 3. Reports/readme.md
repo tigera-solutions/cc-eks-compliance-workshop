@@ -1,8 +1,32 @@
-# 3. Reports
+# 3. Reports & Visualization
 
-## Built in Report Types
+With the policy portion of securing our application compelete, we need a way to report that our application is in compliance going forward. There are two main tools for this within Calico Cloud:
 
-With the policy portion of securing our application compelete, we need a way to report that our application is in compliance going forward. Using the reporting feature of Calico Cloud we can create a number of reports to satisfy the various PCI DSS and SOC 2 reporting requirements.
+## Visualizations
+
+In Calico Cloud, there are two tools that help us provide visualizations of our cluster and traffic:Service Graph and Flow Visualizations.
+
+### Service Graph
+
+Service Graph is a graph of pod and service communication for all applications within the cluster. Allows for customized views to show relationships between namespaces, services, and deployments
+
+<p align="center">
+  <img src="images/service-graph.png" alt="Service Graph" align="center" width="600">
+</p>
+
+### Flow Visualization
+
+Calico Enterprise logs all network flows including source and destination namespaces, pods, labels, and the policies that evaluate each flow. Logs of all connection attempts (inside and outside the cluster) are automatically generated so you can quickly identify source of connectivity issues.
+
+The Flow Visualizer lets you quickly drill down and pinpoint which policies are allowing and denying traffic between their services.
+
+<p align="center">
+  <img src="images/flow-visualizer.png" alt="Flow Visualizions" align="center" width="600">
+</p>
+
+## Calico Cloud Reports
+
+Using the reporting feature of Calico Cloud we can create a number of reports to satisfy the various PCI DSS and SOC 2 reporting requirements.
 
 Calico Cloud supports the following built-in report types:
 
@@ -178,6 +202,28 @@ spec:
 EOF
 ```
 
+### Hourly Report - Full Inventory
+
+The following report schedules hourly inventory reports for the cluster.
+
+<p align="center">
+  <img src="images/hourly-inventory.png" alt="Hourly Inventory Example" align="center" width="600">
+</p>
+
+
+```yaml
+kubectl apply -f -<<EOF
+apiVersion: projectcalico.org/v3
+kind: GlobalReport
+metadata:
+  name: hourly-inventory-report
+spec:
+  reportType: inventory
+  jobNodeSelector:
+    nodetype: infrastructure
+  schedule: 0 * * * *
+EOF
+```
 
 ## Known Limitations
 
