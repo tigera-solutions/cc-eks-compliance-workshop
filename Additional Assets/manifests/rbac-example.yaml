@@ -1,0 +1,13 @@
+kind: ClusterRole
+apiVersion: rbac.authorization.k8s.io/v1
+metadata:
+  name: tier-default-reader
+rules:
+  - apiGroups: ["projectcalico.org"]
+    resources: ["tiers"]
+    resourceNames: ["default"]
+    verbs: ["get"]
+  - apiGroups: ["projectcalico.org"]
+    resources: ["tier.networkpolicies"]
+    resourceNames: ["default.*"]
+    verbs: ["get", "list"]

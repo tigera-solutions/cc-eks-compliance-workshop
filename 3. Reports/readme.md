@@ -16,13 +16,24 @@ Service Graph is a graph of pod and service communication for all applications w
 
 ### Flow Visualization
 
-Calico Enterprise logs all network flows including source and destination namespaces, pods, labels, and the policies that evaluate each flow. Logs of all connection attempts (inside and outside the cluster) are automatically generated so you can quickly identify source of connectivity issues.
+Calico Cloud logs all network flows including source and destination namespaces, pods, labels, and the policies that evaluate each flow. Logs of all connection attempts (inside and outside the cluster) are automatically generated so you can quickly identify source of connectivity issues.
 
 The Flow Visualizer lets you quickly drill down and pinpoint which policies are allowing and denying traffic between their services.
 
 <p align="center">
   <img src="images/flow-visualizer.png" alt="Flow Visualizions" align="center" width="600">
 </p>
+
+### Flow Logs
+
+Calico Cloud includes a fully-integrated deployment of Elasticsearch to collect flow log data that drives key features like the Flow Visualizer, metrics in the dashboard and Policy Board, policy automation and testing features, and security.
+
+Calico Cloud also embeds Kibana to view raw log data for the traffic within your cluster. Kibana provides its own set of powerful filtering capabilities to quickly drill into log data. For example, use filters to drill into flow log data for specific namespaces and pods. Or view details and metadata for a single flow log entry.
+
+<p align="center">
+  <img src="images/flow-logs-kibana.png" alt="Flow Logs Kibana" align="center" width="600">
+</p>
+
 
 ## Calico Cloud Reports
 
@@ -235,6 +246,8 @@ EOF
 - RKE
 
 ## Reference Documentation
+
+[Calico Cloud Manager UI Tour](https://docs.calicocloud.io/get-started/tutorials/tour)
 
 [Calico Enterprise Documentation for Compliance Reports](https://docs.tigera.io/compliance/overview)  
 

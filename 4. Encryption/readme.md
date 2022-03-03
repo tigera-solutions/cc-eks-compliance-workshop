@@ -185,11 +185,17 @@ EOF
 
 And now we should be able to see the Wireguard stats on the Calico Cloud dashboard by enabling them through the configuration menu:
 
-![Dashboard Config](images/dashboard-config.png)
+<p align="center">
+  <img src="images/dashboard-config.png" alt="Dashboard Config" align="center" width="300">
+</p>
+
 
 The Dashboard should now show the Wireguard stastics:
 
-![Wireguard Stats](images/wireguard-stats.png)
+<p align="center">
+  <img src="images/wireguard-stats.png" alt="Wireguard Stats" align="center" width="600">
+</p>
+
 
 #### Reference Documentation
 

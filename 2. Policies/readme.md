@@ -7,11 +7,11 @@ Now that we've deployed our web store application, in order to comply with the P
 
 ## Policy Introduction
 
-Kubernetes and Calico Network Policies are made up of three main components that all need to be properly designed and implemented to achieve compliance.
+Kubernetes and Calico Security Policies are made up of three main components that all need to be properly designed and implemented to achieve compliance.
 
 **Labels** - Tag Kubernetes objects for filtering.
 
-**Network Policy** - The primary tool for securing a Kubernetes network. It lets you restrict network traffic in your cluster so only the traffic that you want to flow is allowed. Calico Cloud provides a more robust policy than Kubernetes, but you can use them together – seamlessly.
+**Security Policy** - The primary tool for securing a Kubernetes network. It lets you restrict network traffic in your cluster so only the traffic that you want to flow is allowed. Calico Cloud provides a more robust policy than Kubernetes, but you can use them together – seamlessly.
 
 **Policy Tiers** - A hierarchical construct used to group policies and enforce higher precedence policies that cannot be circumvented by other teams.
 
@@ -27,7 +27,7 @@ First, lets manually apply a label to the multitool pod.
 kubectl label pod multitool mylabel=true
 ```
 
-We can then see the result label using:
+We can then see the resulting label using:
 
 ```bash
 kubectl get pod multitool --show-labels
@@ -237,7 +237,7 @@ EOF
 
 > Manifest File: [2.x-allow-dns.yaml](manifests/2.x-allow-dns.yaml)
 
-### Network Policy
+### Security Policy
 
 Now that we have our foundation in the Policy Tiers, we need to start applying policy to restrict traffic. The first policy we will apply will only allow traffic to flow between pods with the label of 'pci=true'. Pods without the 'pci=true' label will also be able to freely communicate with each other.
 

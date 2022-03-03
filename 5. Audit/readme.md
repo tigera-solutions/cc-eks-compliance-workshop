@@ -16,16 +16,21 @@ Policy Audit logs are also accessible through the Calico Cloud UI directly throu
 
 1. Open the Timeline page from the left navigation menu.
 
-![Menu](images/menu.png)
+<p align="center">
+  <img src="images/menu.png" alt="Menu" align="center" width="150">
+</p>
 
 2. Either browse through the list of Audit Events or search using the filter at the top of the page.
   * Policy Audit Timeline
 
-    ![Policy Audit Timeline](images/timeline.png)
-
+    <p align="center">
+    <img src="images/timeline.png" alt="Policy Audit Timeline" align="center" width="400">
+    </p>  
   * Policy Audit Filter
 
-    ![Policy Audit Filter](images/timeline-filter.png)
+    <p align="center">
+    <img src="images/timeline-filter.png" alt="Policy Audit Filter" align="center" width="600">
+    </p>  
 
 3. Policy Audit Events contain the policy effected, the user to make the change and the manifest of the updated policy.
 
@@ -39,15 +44,21 @@ To access this information,
 
 1. Open a Policy from from the Policies page and scroll down to the Change Log section.
 
-![Policy History](images/policy-history.png)
+<p align="center">
+<img src="images/policy-history.png" alt="Policy History" align="center" width="400">
+</p>  
 
 2. Click on the diff button on an Audit Event to expand the details of that event.
 
-![Policy History](images/policy-history-2.png)
+<p align="center">
+<img src="images/policy-history-2.png" alt="Policy History" align="center" width="600">
+</p>  
 
 3. To view the change in detail, click the 'Diff' button in the top right to bring up a side by side comparison of the two versions.
 
-![Policy History](images/policy-diff.png)
+<p align="center">
+<img src="images/policy-diff.png" alt="Policy Diff" align="center" width="600">
+</p>  
 
 
 ### Kubernetes Host logs
