@@ -18,3 +18,13 @@ During this workshop, we will be focusing on securing a microservices based appl
 - [Section 7. Cleanup](7.%20Cleanup/readme.md)
 - [Additional Assets](Additional%20Assets/readme.md)
 
+## PCI DSS
+
+[PCI DSS Standard](https://www.pcisecuritystandards.org/documents/PCI_DSS-QRG-v3_2_1.pdf)
+
+## White Papers
+
+[SOC 2](https://info.tigera.io/rs/805-GFH-732/images/tigera-assets-whitepaper-soc2.pdf)
+
+[PCI DSS](https://info.tigera.io/rs/805-GFH-732/images/tigera-assets-whitepaper-pci.pdf)
+
