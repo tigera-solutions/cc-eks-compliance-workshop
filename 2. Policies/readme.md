@@ -976,6 +976,7 @@ A global egress access policy allows us to limit what external resources the pod
 First, lets created our list of allowed domains:
 
 ```yaml
+kubectl apply -f -<<EOF
 kind: GlobalNetworkSet
 apiVersion: projectcalico.org/v3
 metadata:
@@ -987,12 +988,14 @@ spec:
   allowedEgressDomains:
     - google.ca
     - tigera.io
+EOF
 ```
 > Manifest File: [manifests/2.9-global-trusted-domains.yaml](manifests/2.9-global-trusted-domains.yaml)
 
 And now we'll apply our policy into the security tier and have it reference our list of trusted domains we just created.
 
 ```yaml
+kubectl apply -f -<<EOF
 apiVersion: projectcalico.org/v3
 kind: GlobalNetworkPolicy
 metadata:
@@ -1013,6 +1016,7 @@ spec:
   preDNAT: false
   types:
     - Egress
+EOF
 ```
 > Manifest File: [2.10-egress-dns-policy.yaml](manifests/2.10-egress-dns-policy.yaml)
 

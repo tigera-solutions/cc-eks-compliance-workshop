@@ -171,6 +171,10 @@ EOF
 
 The following report schedules daily network-access reports for all endpoints that have the 'pci=true' label.
 
+'''bash
+kubectl label -n hipstershop pod 
+'''
+
 <p align="center">
   <img src="images/pci-network-access.png" alt="PCI Network-Access Example" align="center" width="600">
 </p>

@@ -192,6 +192,7 @@ Content-Type: text/html; charset=utf-8
 
 Now that the application is deployed and running, let's enable ingress access to it by creating an ingress using the following spec:
 ```yaml
+kubectl apply -f -<<EOF
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
@@ -209,6 +210,7 @@ spec:
                 name: frontend
                 port:
                   number: 80
+EOF
 ```
 >Manfest: [Ingress Manifest](manifests/0.2-hipstershop-ingress.yaml)
 
