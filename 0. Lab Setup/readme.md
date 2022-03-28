@@ -10,7 +10,7 @@ For testing, we will also be deploying a tools container called Network-Multitoo
 
 ## Setup Lynx Lab with Calico Cloud
 
-*If you are following along in your own lab, refer to [Project Calico Getting Started](https://projectcalico.docs.tigera.io/getting-started/kubernetes/) and [Connect your cluster](https://docs.calicocloud.io/operations/connect/) to get started*
+*If you are following along in your own lab, refer to [Project Calico Getting Started](https://projectcalico.docs.tigera.io/getting-started/kubernetes/) and [Connect your cluster](https://docs.calicocloud.io/get-started/connect/) to get started*
 
 To connect the Lynx lab environment to Calico Cloud, first we need to install Project Calico as the CNI. This will enable networking in the cluster.
 
@@ -66,7 +66,7 @@ spec: {}
 
 Now, apply the custom resource manifest to install Calico as the CNI.
 ```bash
-kubectl apply -f custom-resource.yaml
+kubectl apply -f custom-resources.yaml
 ```
 
 After a couple of minutes, all nodes should now show as Ready.
@@ -216,7 +216,7 @@ EOF
 
 After deploying you will need to patch the host to match your lab URL using the following command(substitute the keyword LABNAME with the name of your lab):
 ```bash
-kubectl patch ingress hipstershop -n hipstershop --type='json' -p='[{"op": "replace", "path":"/spec/rules/0/host", "value":"hipstershop.<LABNAME>.lynx.tigera.ca"}]'
+kubectl patch ingress hipstershop-ingress -n hipstershop --type='json' -p='[{"op": "replace", "path":"/spec/rules/0/host", "value":"hipstershop.<LABNAME>.lynx.tigera.ca"}]'
 ```
 
 After completion you should be able to reach your Online Boutique application at:
