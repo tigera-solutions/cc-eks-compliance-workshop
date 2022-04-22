@@ -45,6 +45,9 @@ kubectl label pods --all -n hipstershop pci=true
 Then, verify the labels are applied:
 
 ```bash
+kubectl get pods -n hipstershop --show-labels
+```
+```bash
 tigera@bastion:~$ kubectl get pods -n hipstershop --show-labels
 NAME                                     READY   STATUS    RESTARTS   AGE   LABELS
 adservice-6569cd7bb6-v9v54               1/1     Running   0          28h   app=adservice,pci=true,pod-template-hash=6569cd7bb6
@@ -209,15 +212,15 @@ spec:
     - Egress
 ---
 apiVersion: projectcalico.org/v3
-kind: GlobalNetworkPolicy
+kind: StagedGlobalNetworkPolicy
 metadata:
   name: default.default-deny
 spec:
   tier: default
-  order: 0
-  selector: ""
-  namespaceSelector: ""
-  serviceAccountSelector: ""
+  order: 1100
+  selector: ''
+  namespaceSelector: ''
+  serviceAccountSelector: ''
   doNotTrack: false
   applyOnForward: false
   preDNAT: false
@@ -302,7 +305,7 @@ spec:
       destination: {}
     - action: Deny
       source:
-        selector: pci == "true"
+        selector: pci != "true"
       destination: {}
   egress:
     - action: Allow
@@ -360,7 +363,33 @@ For testing we will use two tools, curl and netcat.
 > -v for verbose
 > -w 3 to limit the timeout to 3 seconds
 
+Before we start testing, we're going to get the addresses of all the Online Boutique services so we can use them in the testing to follow. To do this we'll run the following command and keep the output handy:
+
+```bash
+kubectl get svc -n hipstershop -o wide
+```
+
+Example output:
+```bash
+$ kubectl get svc -n hipstershop
+NAME                    TYPE           CLUSTER-IP     EXTERNAL-IP     PORT(S)        AGE
+adservice               ClusterIP      10.0.131.26    <none>          9555/TCP       4h37m
+cartservice             ClusterIP      10.0.214.232   <none>          7070/TCP       4h37m
+checkoutservice         ClusterIP      10.0.162.114   <none>          5050/TCP       4h37m
+currencyservice         ClusterIP      10.0.227.232   <none>          7000/TCP       4h37m
+emailservice            ClusterIP      10.0.72.153    <none>          5000/TCP       4h37m
+frontend                ClusterIP      10.0.41.230    <none>          80/TCP         4h37m
+frontend-external       LoadBalancer   10.0.209.155   51.143.16.163   80:30113/TCP   4h37m
+paymentservice          ClusterIP      10.0.85.72     <none>          50051/TCP      4h37m
+productcatalogservice   ClusterIP      10.0.60.54     <none>          3550/TCP       4h37m
+recommendationservice   ClusterIP      10.0.20.46     <none>          8080/TCP       4h37m
+redis-cart              ClusterIP      10.0.160.215   <none>          6379/TCP       4h37m
+shippingservice         ClusterIP      10.0.77.30     <none>          50051/TCP      4h37m
+```
+
 First, from inside of the 'hipstershop' namespace, we'll exec into the multitool pod and connect to the 'frontend' as well as try to connect to the 'cartservice' directly. To do this we will use NetCat and Curl.
+
+From the above output, we know that our 'cartservice' is has an address of '10.0.214.232'.
 
 Exec into the pod:
 ```bash
@@ -369,12 +398,12 @@ kubectl exec -n hipstershop multitool --stdin --tty -- /bin/bash
 
 Test connectivity to 'cartservice' directly:
 ```bash
-bash-5.1# nc -zvw 3 10.49.133.111 7070
-10.49.133.111 (10.49.133.111:7070) open
+bash-5.1# nc -zvw 3 10.0.214.232 7070
+10.0.214.232 (10.0.214.232:7070) open
 ```
 And connectivity to the 'frontend':
 ```bash
-bash-5.1# curl -I 10.49.14.192
+bash-5.1# curl -I 10.0.41.230
 HTTP/1.1 200 OK
 Set-Cookie: shop_session-id=1939f999-1237-4cc7-abdb-949423eae483; Max-Age=172800
 Date: Wed, 26 Jan 2022 20:14:20 GMT
@@ -383,10 +412,15 @@ Content-Type: text/html; charset=utf-8
 
 As expected, we can reach both services from a pod with the pci=true label.
 
-Now lets try from a pod without the 'pci=true' label that is outside of the namespace.
+Now lets try from a pod without the 'pci=true' label that is outside of the namespace. To do this, we'll use our multitool pod in the default namespace:
+
 ```bash
-bash-5.1# nc -zvw 3 10.49.133.111 7070
-nc: 10.49.133.111 (10.49.133.111:7070): Operation timed out
+kubectl exec multitool --stdin --tty -- /bin/bash
+```
+
+```bash
+bash-5.1# nc -zvw 3 10.0.214.232 7070
+nc: 10.0.214.232 (10.0.214.232:7070): Operation timed out
 ```
 ```bash
 bash-5.1# curl -I 10.49.14.192
@@ -410,8 +444,8 @@ And we can test again:
 tigera@bastion:~$ kc exec multitool --stdin --tty -- /bin/bash
 ```
 ```bash
-bash-5.1# nc -zvw 3 10.49.133.111 7070
-10.49.133.111 (10.49.133.111:7070) open
+bash-5.1# nc -zvw 3 10.0.214.232 7070
+10.0.214.232 (10.0.214.232:7070) open
 ```
 
 We can successfully connect from the MultiTool pod in the default namespace to a service in the hipstershop namespace as long as they both have the 'pci=true' label.
@@ -472,11 +506,11 @@ There are multiple ways to accomplish this, we could very easily have isolated t
 
 Testing from outside of the tenant label (Multitool Pod in the default namespace):
 ```bash
-tigera@bastion:~$ kubectl exec multitool --stdin --tty -- /bin/bash
+kubectl exec multitool --stdin --tty -- /bin/bash
 ```
 ```bash
-bash-5.1# nc -zvw 3 10.49.133.111 7070
-nc: 10.49.133.111 (10.49.133.111:7070): Operation timed out
+bash-5.1# nc -zvw 3 10.0.214.232 7070
+nc: 10.0.214.232 (10.0.214.232:7070): Operation timed out
 ```
 NetCat fails to connect to the cart service.
 
@@ -487,7 +521,7 @@ Set-Cookie: shop_session-id=90b6b2f4-c701-45c4-8a97-bb6ca5302a47; Max-Age=172800
 Date: Wed, 26 Jan 2022 20:42:07 GMT
 Content-Type: text/html; charset=utf-8
 ```
-But HTTP traffic is still allowed by our 'pci-whitelist' rule.
+But HTTP traffic is still allowed by our 'pci-allowlist' rule.
 
 Now we've successfully isolated the 'tenant=hipstershop' label but if exec into pod within the tenant we can still access services that we shouldn't be able to.
 

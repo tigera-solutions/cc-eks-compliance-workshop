@@ -1,10 +1,10 @@
 apiVersion: projectcalico.org/v3
-kind: GlobalNetworkPolicy
+kind: StagedGlobalNetworkPolicy
 metadata:
   name: default.default-deny
 spec:
   tier: default
-  order: 0
+  order: 1100
   selector: ""
   namespaceSelector: ""
   serviceAccountSelector: ""

@@ -198,6 +198,13 @@ EOF
 
 The following report schedules daily network-access reports for all endpoints that have the 'infra-pci-ingress=true' label.
 
+To get this report to work, we'll first need to add the 'infra-pci-ingress=true' label to the frontend service of the Online Boutique.
+
+```bash
+kubectl label -n hipstershop svc frontend infra-pci-ingress=true
+kubectl label -n hipstershop svc frontend-external infra-pci-ingress=true
+```
+
 <p align="center">
   <img src="images/pci-ingress-networkaccess.png" alt="PCI Ingress Network-Access Example" align="center" width="600">
 </p>
