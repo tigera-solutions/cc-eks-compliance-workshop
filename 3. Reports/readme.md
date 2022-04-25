@@ -1,6 +1,6 @@
 # 3. Reports & Visualization
 
-With the policy portion of securing our application compelete, we need a way to report that our application is in compliance going forward. There are two main tools for this within Calico Cloud:
+With the policy portion of securing our application complete, we need a way to report that our application is in compliance going forward. There are two main tools for this within Calico Cloud:
 
 ## Visualizations
 
@@ -21,7 +21,7 @@ Calico Cloud logs all network flows including source and destination namespaces,
 The Flow Visualizer lets you quickly drill down and pinpoint which policies are allowing and denying traffic between their services.
 
 <p align="center">
-  <img src="images/flow-visualizer.png" alt="Flow Visualizions" align="center" width="600">
+  <img src="images/flow-visualizer.png" alt="Flow Visualizations" align="center" width="600">
 </p>
 
 ### Flow Logs
@@ -98,7 +98,7 @@ EOF
 ```
 
 
-### Weekly Report - Full Insfrastructure Inventory
+### Weekly Report - Full Infrastructure Inventory
 
 The following report schedules weekly inventory reports for all endpoints. The jobs that create the reports will run on the infrastructure nodes (e.g. nodetype == ‘infrastructure’).
 
