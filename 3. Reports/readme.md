@@ -198,11 +198,10 @@ EOF
 
 The following report schedules daily network-access reports for all endpoints that have the 'infra-pci-ingress=true' label.
 
-To get this report to work, we'll first need to add the 'infra-pci-ingress=true' label to the frontend service of the Online Boutique.
+To get this report to work, we'll first need to add the 'infra-pci-ingress=true' label to the frontend pods of the Online Boutique. The following command will get the frontend pod name and label it.
 
 ```bash
-kubectl label -n hipstershop svc frontend infra-pci-ingress=true
-kubectl label -n hipstershop svc frontend-external infra-pci-ingress=true
+for pod in $(kubectl get pods -n hipstershop -l app=frontend --no-headers -o name); do kubectl label -n hipstershop $pod infra-pci-ingress=true; done
 ```
 
 <p align="center">
