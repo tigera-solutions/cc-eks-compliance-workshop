@@ -21,13 +21,13 @@ For more details on the install of Project Calico, refer to the [Online Document
 First, we will install the Tigera Operator on the cluster:
 
 ```bash
-kubectl create -f https://docs.projectcalico.org/manifests/tigera-operator.yaml
+kubectl create -f https://projectcalico.docs.tigera.io/archive/v3.22/manifests/tigera-operator.yaml
 ```
 
 Next, download the custom resource manifest. We will modify it before applying.
 
 ```bash
-wget https://docs.projectcalico.org/manifests/custom-resources.yaml
+wget https://projectcalico.docs.tigera.io/archive/v3.22/manifests/custom-resources.yaml
 ```
 
 Now, we will modify the custom-resources.yaml file to match our cluster CIDR value and desired encapsulation:
