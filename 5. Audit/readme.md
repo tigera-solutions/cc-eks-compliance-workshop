@@ -45,7 +45,7 @@ To access this information,
 1. Open a Policy from from the Policies page and scroll down to the Change Log section.
 
 <p align="center">
-<img src="images/policy-history.png" alt="Policy History" align="center" width="400">
+<img src="images/policy-history.png" alt="Policy History" align="center" width="250">
 </p>  
 
 2. Click on the diff button on an Audit Event to expand the details of that event.
