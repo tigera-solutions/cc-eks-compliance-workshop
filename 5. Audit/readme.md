@@ -109,7 +109,6 @@ Logs can be exported to an external SIEM such as Splunk, syslog, or Amazon S3. T
 - Ensure that all nodes in your Kubernetes clusters must be time-synchronized using NTP or similar (for accurate audit log timestamps)
 
 ### Calico Cloud Limitations
->**Make notes about exceptions in audit log collection/retention such as Azure**
 
 When using a hosted kubernetes service such as AKS, you will not have access to the kubernetes cluster audit logs.
 
