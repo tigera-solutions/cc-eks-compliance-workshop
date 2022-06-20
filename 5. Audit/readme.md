@@ -24,7 +24,7 @@ Policy Audit logs are also accessible through the Calico Cloud UI directly throu
   * Policy Audit Timeline
 
     <p align="center">
-    <img src="images/timeline.png" alt="Policy Audit Timeline" align="center" width="400">
+    <img src="images/timeline.png" alt="Policy Audit Timeline" align="center" width="600">
     </p>  
   * Policy Audit Filter
 
@@ -34,7 +34,10 @@ Policy Audit logs are also accessible through the Calico Cloud UI directly throu
 
 3. Policy Audit Events contain the policy effected, the user to make the change and the manifest of the updated policy.
 
-![Policy Audit Entry](images/policy-audit.png)
+    <p align="center">
+    <img src="images/policy-audit.png" alt="Policy Audit Event" align="center" width="600">
+    </p>  
+
 
 ## Policy Audit Inside of Policy
 

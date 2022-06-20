@@ -2,12 +2,6 @@
 
 In addition to tools and features already explored, Calico Cloud offers the following tools to aid in security and compliance:
 
-## Advanced RBAC
-
-> To DO
-
-RBAC for
-
 ## Intrusion Detection
 
 ### Anomaly Detection
@@ -37,7 +31,7 @@ spec:
 ### Cluster Cleanup
 
 
-> To DO
+> To disconnect your cluster from Calico Cloud, follow the instructions below
 
 https://docs.calicocloud.io/operations/disconnect
 
