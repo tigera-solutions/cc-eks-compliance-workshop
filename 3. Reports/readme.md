@@ -2,6 +2,16 @@
 
 With the policy portion of securing our application complete, we need a way to report that our application is in compliance going forward. There are two main tools for this within Calico Cloud:
 
+## Increasing Log Flush Frequency
+
+By default, flow logs will be flushed from the hosts and stored in Elasticsearch every 300s (5 minutes). During normal operation this default value will be adequate for troubleshooting and auditing. For this workshop, we will reduce our flow log flush interval to 30s to make it easier to see the results of our policies.
+
+*Note - Increasing the frequency of logs sent to Elasticsearch will increase the storage usage.
+
+```bash
+kubectl patch felixconfiguration default --type='merge' -p '{"spec":{"flowLogsFlushInterval":"30s"}}'
+```
+
 ## Visualizations
 
 In Calico Cloud, there are two tools that help us provide visualizations of our cluster and traffic:Service Graph and Flow Visualizations.
@@ -34,6 +44,14 @@ Calico Cloud also embeds Kibana to view raw log data for the traffic within your
   <img src="images/flow-logs-kibana.png" alt="Flow Logs Kibana" align="center" width="600">
 </p>
 
+
+## Reset Flow Log Flush Setting
+
+Now that we've seen our traffic in the flow logs, lets reset our flow log flush interval to the default:
+
+```bash
+kubectl patch felixconfiguration default --type='merge' -p '{"spec":{"flowLogsFlushInterval":"300s"}}'
+```
 
 ## Calico Cloud Reports
 
