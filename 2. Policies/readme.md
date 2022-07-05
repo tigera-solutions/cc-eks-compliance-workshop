@@ -502,6 +502,49 @@ EOF
 ```
 > Manifest File: [2.5-tenant-isolation-policy.yaml](manifests/2.5-tenant-isolation-policy.yaml)
 
+Before we test our policy, we will need to make some updates to the PCI restriction policy. Right now the PCI policy allows communication between all the 'pci=true' pods. We want to pass this decision to the 'platform' tier so we will apply the following update:
+
+**PCI Policy Update**
+```yaml
+kubectl apply -f -<<EOF
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: security.pci-restrict
+spec:
+  tier: security
+  order: 75
+  selector: pci == "true"
+  namespaceSelector: ''
+  serviceAccountSelector: ''
+  ingress:
+    - action: Pass
+      source:
+        selector: pci == "true"
+      destination: {}
+    - action: Deny
+      source:
+        selector: pci != "true"
+      destination: {}
+  egress:
+    - action: Pass
+      source: {}
+      destination:
+        selector: pci == "true"
+    - action: Deny
+      source: {}
+      destination:
+        selector: pci != "true"
+  doNotTrack: false
+  applyOnForward: false
+  preDNAT: false
+  types:
+    - Ingress
+    - Egress
+EOF
+```
+> Manifest File: [2.7-pci-policy-update.yaml](manifests/2.7-pci-policy-update.yaml)
+
 There are multiple ways to accomplish this, we could very easily have isolated traffic within the namespace as well. Isolating based on the tenant label in this scenario accomplishes our goal of isolating traffic within the hipstershop application.  We can verify by again testing using curl and netcat:
 
 Testing from outside of the tenant label (Multitool Pod in the default namespace):
@@ -919,48 +962,7 @@ EOF
 ```
 > Manifest File: [2.6-hipstershop-policy.yaml](manifests/2.6-hipstershop-policy.yaml)
 
-Before this policy will be applied though, we will have to go back and make a modification to our PCI Restriction and Tenant Isolation Policies to completely enable our microsegmentation. Right now the PCI policy allows communication between all the 'pci=true' pods and the Tenant Isolation policy allows open communication between pods with the 'tenant=hipstershop' label. We want to pass this decision to the 'app-hipstershop' tier so we will apply the following update:
-
-**PCI Policy Update**
-```yaml
-kubectl apply -f -<<EOF
-apiVersion: projectcalico.org/v3
-kind: GlobalNetworkPolicy
-metadata:
-  name: security.pci-restrict
-spec:
-  tier: security
-  order: 75
-  selector: pci == "true"
-  namespaceSelector: ''
-  serviceAccountSelector: ''
-  ingress:
-    - action: Pass
-      source:
-        selector: pci == "true"
-      destination: {}
-    - action: Deny
-      source:
-        selector: pci != "true"
-      destination: {}
-  egress:
-    - action: Pass
-      source: {}
-      destination:
-        selector: pci == "true"
-    - action: Deny
-      source: {}
-      destination:
-        selector: pci != "true"
-  doNotTrack: false
-  applyOnForward: false
-  preDNAT: false
-  types:
-    - Ingress
-    - Egress
-EOF
-```
-> Manifest File: [2.7-pci-policy-update.yaml](manifests/2.7-pci-policy-update.yaml)
+Before this policy will be applied though, we will have to go back and make a modification to our Tenant Isolation Policy to completely enable our microsegmentation. Right now the Tenant Isolation policy allows open communication between pods with the 'tenant=hipstershop' label. We want to pass this decision to the 'app-hipstershop' tier so we will apply the following update:
 
 **Tenant Isolation Policy Update**
 ```yaml
