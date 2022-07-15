@@ -330,7 +330,7 @@ Now we can verify this is working as expected.
 
 ## PCI Policy Testing
 
-To test, we'll use our MultiTool pods both inside of the 'hipstershop' namespace and in the default namespace. Before we can complete the testing from the default namespace, we'll have to apply a policy that allows egress traffic from the pods in the default namespace. This is because we're applying an egress policy in an earlier step, so now, if we don't allow it at some point it will be denied by default. To get around this we'll apply this policy:
+To test, we'll use our MultiTool pods both inside of the 'hipstershop' namespace and in the default namespace. Before we can complete the testing from the default namespace, we'll have to apply a policy that allows egress traffic from the pods in the default namespace. This is because we're applying an egress policy in an earlier step, so now, if we don't allow it explicitly, the default deny will drop the traffic when it is enforced. To get around this we'll apply this policy:
 
 ```yaml
 kubectl apply -f -<<EOF
@@ -1091,6 +1091,22 @@ PING github.com (140.82.112.3) 56(84) bytes of data.
 ```
 
 As expected our pings to google.ca and tigera.io are successful but our ping to github.com is denied.
+
+## Enforcing the Default Deny Policy
+
+The last step in the policy creation process is to enforce our default-deny policy. Currently, with the default-deny policy in staged mode, any traffic that is passed but does not match another tier will be allowed.
+
+Through the UI, enforce the the default-deny policy by opening it from the Policy Board and select the Edit option. 
+
+<p align="center">
+  <img src="images/policy-board-default-deny.png" alt="Default Deny Policy Board" align="center" width="400">
+</p>
+
+From the Policy Edit screen, select Enforce.
+
+<p align="center">
+  <img src="images/enforce-default-deny.png" alt="Enforce Default Deny" align="center" width="600">
+</p>
 
 Now our policies are complete. 
 
