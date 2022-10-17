@@ -24,16 +24,7 @@ First, we will install the Tigera Operator on the cluster:
 kubectl create -f https://projectcalico.docs.tigera.io/archive/v3.22/manifests/tigera-operator.yaml
 ```
 
-Next, download the custom resource manifest. We will modify it before applying.
-
-```bash
-wget https://projectcalico.docs.tigera.io/archive/v3.22/manifests/custom-resources.yaml
-```
-
-Now, we will modify the custom-resources.yaml file to match our cluster CIDR value and desired encapsulation:
-
-    cidr: 10.48.0.0/16
-    encapsulation: None
+Next, we apply the custom resource manifest to install Calico as the CNI.
 
 ```yaml
 kubectl apply -f -<<EOF
@@ -62,11 +53,6 @@ metadata:
     name: default
 spec: {}
 EOF
-```
-
-Now, apply the custom resource manifest to install Calico as the CNI.
-```bash
-kubectl apply -f custom-resources.yaml
 ```
 
 After a couple of minutes, all nodes should now show as Ready.
