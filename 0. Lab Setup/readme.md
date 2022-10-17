@@ -157,8 +157,8 @@ First, get the IP address of the frontend-external service:
 kubectl get svc -n hipstershop frontend-external
 ```
 ```bash
-NAME                TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
-frontend-external   NodePort   10.49.14.192  <none>        80:32747/TCP   4h50m
+NAME                TYPE       **CLUSTER-IP**      EXTERNAL-IP   PORT(S)        AGE
+frontend-external   NodePort   **10.49.14.192**  <none>        80:32747/TCP   4h50m
 ```
 
 Next, connect to the shell inside of the Network-Multitool pod in default namespace using kubectl exec:
@@ -166,7 +166,7 @@ Next, connect to the shell inside of the Network-Multitool pod in default namesp
 kubectl exec multitool --stdin --tty -- /bin/bash
 ```
 
-Now we'll use curl to verify we can reach the web frontend of the application (your Cluster-IP address might be different in your cluster, replace it accordingly):
+Now we'll use curl to verify we can reach the web frontend of the application (your **Cluster-IP** address might be different in your cluster, replace it accordingly):
 ```bash
 bash-5.1# curl -I 10.49.14.192
 HTTP/1.1 200 OK
