@@ -179,7 +179,7 @@ Content-Type: text/html; charset=utf-8
 
 *If you are not running within the Tigera Lynx lab, you will need to setup ingress according to your environment.*
 
-Now that the application is deployed and running, let's enable ingress access to it by creating an ingress using the following spec:
+Now that the application is deployed and running, let's enable ingress access to it by creating an ingress rule using the following spec:
 ```yaml
 kubectl apply -f -<<EOF
 apiVersion: networking.k8s.io/v1
