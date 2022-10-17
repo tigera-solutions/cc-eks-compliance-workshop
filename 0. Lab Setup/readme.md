@@ -61,9 +61,9 @@ kubectl get nodes
 ```
 ```bash
 NAME                                         STATUS   ROLES                  AGE   VERSION
-ip-10-0-1-20.ca-central-1.compute.internal   Ready    control-plane,master   18m   v1.20.7
-ip-10-0-1-30.ca-central-1.compute.internal   Ready    worker                 18m   v1.20.7
-ip-10-0-1-31.ca-central-1.compute.internal   Ready    worker                 18m   v1.20.7
+ip-10-0-1-20.ca-central-1.compute.internal   Ready    control-plane,master   9d    v1.21.7
+ip-10-0-1-30.ca-central-1.compute.internal   Ready    worker                 9d    v1.21.7
+ip-10-0-1-31.ca-central-1.compute.internal   Ready    worker                 9d    v1.21.7
 ```
 
 With the cluster online, we can now take the installer string from our Calico Cloud Connect Cluster wizard and run it on our bastion host.
