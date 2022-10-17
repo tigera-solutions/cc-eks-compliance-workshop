@@ -42,10 +42,10 @@ kubectl apply -f -<<EOF
 apiVersion: operator.tigera.io/v1
 kind: Installation
 metadata:
-    name: default
+  name: default
 spec:
-    # Configures Calico networking.
-    calicoNetwork:
+  # Configures Calico networking.
+  calicoNetwork:
     # Note: The ipPools section cannot be modified post-install.
     ipPools:
     - blockSize: 26
