@@ -174,6 +174,7 @@ Set-Cookie: shop_session-id=1939f999-1237-4cc7-abdb-949423eae483; Max-Age=172800
 Date: Wed, 26 Jan 2022 20:14:20 GMT
 Content-Type: text/html; charset=utf-8
 ```
+Exit the shell by typing **exit**.
 
 ### Setup Ingress to the Hipstershop (optional)
 
