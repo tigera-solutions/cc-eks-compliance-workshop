@@ -49,13 +49,11 @@ spec:
     # Note: The ipPools section cannot be modified post-install.
     ipPools:
     - blockSize: 26
-        cidr: 10.48.0.0/16
-        encapsulation: None
-        natOutgoing: Enabled
-        nodeSelector: all()
-
+      cidr: 10.48.0.0/24
+      encapsulation: None
+      natOutgoing: Enabled
+      nodeSelector: all()
 ---
-
 # This section configures the Calico API server.
 # For more information, see: https://docs.projectcalico.org/v3.21/reference/installation/api#operator.tigera.io/v1.APIServer
 apiVersion: operator.tigera.io/v1
