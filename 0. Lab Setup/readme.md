@@ -57,7 +57,9 @@ EOF
 
 After a couple of minutes, all nodes should now show as Ready.
 ```bash
-tigera@bastion:~/calico-cloud-install$ kubectl get nodes
+kubectl get nodes
+```
+```bash
 NAME                                         STATUS   ROLES                  AGE   VERSION
 ip-10-0-1-20.ca-central-1.compute.internal   Ready    control-plane,master   18m   v1.20.7
 ip-10-0-1-30.ca-central-1.compute.internal   Ready    worker                 18m   v1.20.7
