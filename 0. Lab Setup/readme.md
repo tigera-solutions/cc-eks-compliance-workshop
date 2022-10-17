@@ -204,7 +204,7 @@ EOF
 ```
 >Manfest: [Ingress Manifest](manifests/0.2-hipstershop-ingress.yaml)
 
-After deploying you will need to patch the host to match your lab URL using the following command(substitute the keyword LABNAME with the name of your lab):
+After deploying you will need to patch the host to match your lab URL using the following command (substitute the keyword LABNAME with the name of your lab):
 ```bash
 kubectl patch ingress hipstershop-ingress -n hipstershop --type='json' -p='[{"op": "replace", "path":"/spec/rules/0/host", "value":"hipstershop.<LABNAME>.lynx.tigera.ca"}]'
 ```
