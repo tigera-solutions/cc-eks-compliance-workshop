@@ -36,6 +36,7 @@ Now, we will modify the custom-resources.yaml file to match our cluster CIDR val
     encapsulation: None
 
 ```yaml
+kubectl apply -f -<<EOF
 # This section includes base Calico installation configuration.
 # For more information, see: https://docs.projectcalico.org/v3.21/reference/installation/api#operator.tigera.io/v1.Installation
 apiVersion: operator.tigera.io/v1
@@ -62,6 +63,7 @@ kind: APIServer
 metadata:
     name: default
 spec: {}
+EOF
 ```
 
 Now, apply the custom resource manifest to install Calico as the CNI.
