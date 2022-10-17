@@ -155,6 +155,8 @@ hipstershop                  multitool                                        1/
 First, get the IP address of the frontend-external service:
 ```bash
 kubectl get svc -n hipstershop frontend-external
+```
+```bash
 NAME                TYPE       CLUSTER-IP      EXTERNAL-IP   PORT(S)        AGE
 frontend-external   NodePort   10.49.14.192  <none>        80:32747/TCP   4h50m
 ```
