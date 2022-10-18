@@ -313,7 +313,7 @@ spec:
       source: {}
       destination:
         selector: pci == "true"
-    - action: Allow
+    - action: Deny
       source: {}
       destination:
         selector: pci != "true"
