@@ -446,7 +446,7 @@ kubectl label pod multitool pci=true
 And we can test again:
 
 ```bash
-tigera@bastion:~$ kc exec multitool --stdin --tty -- /bin/bash
+kubectl exec multitool --stdin --tty -- /bin/bash
 ```
 ```bash
 bash-5.1# nc -zvw 3 10.0.214.232 7070
