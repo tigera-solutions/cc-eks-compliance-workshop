@@ -1093,7 +1093,7 @@ PING github.com (140.82.112.3) 56(84) bytes of data.
 
 As expected our pings to google.ca and tigera.io are successful but our ping to github.com is denied.
 
-Exit from the shell by typing exit.
+Exit from the shell by typing **exit**.
 
 ## Enforcing the Default Deny Policy
 
