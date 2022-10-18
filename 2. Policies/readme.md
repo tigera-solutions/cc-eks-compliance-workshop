@@ -603,7 +603,6 @@ recommendationservice | productcatalogservice | 3550
 
 This results in the following policy which we can now apply to the app-hipstershop tier using:
 
-Hipstershop Policy:
 ```yaml
 kubectl apply -f -<<EOF
 apiVersion: projectcalico.org/v3
