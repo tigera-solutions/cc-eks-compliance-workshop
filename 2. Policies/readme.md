@@ -435,7 +435,7 @@ Content-Type: text/html; charset=utf-8
 
 As expected, we can connect to 'frontend' because it has a policy allowing it but we can't connect to the cartservice on 7070 because of our PCI isolation policy.
 
-Exit from the shell by typing exit.
+Exit from the shell by typing **exit**.
 
 Let's add the 'pci=true' label to the pod:
 
