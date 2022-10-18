@@ -66,7 +66,7 @@ redis-cart-74594bd569-vg25j              1/1     Running   0          28h   app=
 shippingservice-85c8d66568-jrdsf         1/1     Running   0          28h   app=shippingservice,pci=true,pod-template-hash=85c8d66568
 ```
 
-Now that the pods are labelled, lets start applying some policy to them.
+Now that the pods are labeled, lets start applying some policy to them.
 
 ## Policy Tiers
 
