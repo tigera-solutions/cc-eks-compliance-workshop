@@ -412,6 +412,7 @@ Content-Type: text/html; charset=utf-8
 ```
 
 As expected, we can reach both services from a pod with the pci=true label.
+Exit from the shell by typing **exit**.
 
 Now lets try from a pod without the 'pci=true' label that is outside of the namespace. To do this, we'll use our multitool pod in the default namespace:
 
