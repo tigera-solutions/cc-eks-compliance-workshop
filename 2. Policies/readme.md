@@ -1070,19 +1070,19 @@ PING google.ca (172.217.13.195) 56(84) bytes of data.
 64 bytes from yul03s05-in-f3.1e100.net (172.217.13.195): icmp_seq=1 ttl=107 time=2.06 ms
 64 bytes from yul03s05-in-f3.1e100.net (172.217.13.195): icmp_seq=2 ttl=107 time=1.75 ms
 64 bytes from yul03s05-in-f3.1e100.net (172.217.13.195): icmp_seq=3 ttl=107 time=1.73 ms
-
 --- google.ca ping statistics ---
 3 packets transmitted, 3 received, 0% packet loss, time 2004ms
 rtt min/avg/max/mdev = 1.729/1.846/2.056/0.148 ms
+
 bash-5.1# ping -c 3 tigera.io
 PING tigera.io (162.159.135.42) 56(84) bytes of data.
 64 bytes from 162.159.135.42 (162.159.135.42): icmp_seq=1 ttl=46 time=8.41 ms
 64 bytes from 162.159.135.42 (162.159.135.42): icmp_seq=2 ttl=46 time=8.53 ms
 64 bytes from 162.159.135.42 (162.159.135.42): icmp_seq=3 ttl=46 time=8.10 ms
-
 --- tigera.io ping statistics ---
 3 packets transmitted, 3 received, 0% packet loss, time 2001ms
 rtt min/avg/max/mdev = 8.103/8.347/8.532/0.180 ms
+
 bash-5.1# ping -c 3 github.com
 PING github.com (140.82.112.3) 56(84) bytes of data.
 
