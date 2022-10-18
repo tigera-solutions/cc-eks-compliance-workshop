@@ -1093,6 +1093,8 @@ PING github.com (140.82.112.3) 56(84) bytes of data.
 
 As expected our pings to google.ca and tigera.io are successful but our ping to github.com is denied.
 
+Exit from the shell by typing exit.
+
 ## Enforcing the Default Deny Policy
 
 The last step in the policy creation process is to enforce our default-deny policy. Currently, with the default-deny policy in staged mode, any traffic that is passed but does not match another tier will be allowed.
