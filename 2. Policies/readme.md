@@ -31,7 +31,8 @@ We can then see the resulting label using:
 
 ```bash
 kubectl get pod multitool --show-labels
-
+```
+```bash
 NAME        READY   STATUS    RESTARTS   AGE    LABELS
 multitool   1/1     Running   0          2d6h   mylabel=true,run=multitool
 ```
