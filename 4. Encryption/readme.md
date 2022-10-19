@@ -42,7 +42,7 @@ kubectl get nodes -o yaml | grep 'kubernetes.io/hostname\|Wireguard'
 Which will give us the following output showing the nodes hostname as well as the Wireguard Interface Address and PublicKey:
 
 ```bash
-tigera@bastion:~$ kc get nodes -o yaml | grep 'kubernetes.io/hostname\|Wireguard'
+tigera@bastion:~$ kubectl get nodes -o yaml | grep 'kubernetes.io/hostname\|Wireguard'
       projectcalico.org/IPv4WireguardInterfaceAddr: 10.48.115.87
       projectcalico.org/WireguardPublicKey: gsxCZHLjKBjJozxRFiKjbMB3QtVTluQDmbvQVfANmXE=
       kubernetes.io/hostname: ip-10-0-1-20.ca-central-1.compute.internal
