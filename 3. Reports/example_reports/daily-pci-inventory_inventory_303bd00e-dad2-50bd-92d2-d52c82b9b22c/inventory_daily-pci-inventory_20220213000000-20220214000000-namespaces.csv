@@ -1,4 +1,0 @@
-
-      namespace,ingressProtected,egressProtected,envoyEnabled
-Namespace.v1(hipstershop),true,true,false
-

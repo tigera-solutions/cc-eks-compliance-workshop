@@ -1,2 +1,0 @@
-startTime,endTime,type,hiPercentThreshold,medPercentThreshold,hiNodeCount,medNodeCount,lowNodeCount
-2022-02-13T00:00:00Z,2022-02-14T00:00:00Z,kube,100,50,0,1,2

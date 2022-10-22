@@ -1,4 +1,0 @@
-
-      endpoint,ingressProtected,egressProtected,ingressFromInternet,egressToInternet,ingressFromOtherNamespace,egressToOtherNamespace,envoyEnabled,appliedPolicies,trafficAggregationPrefix,endpointsGeneratingTrafficToThisEndpoint,endpointsReceivingTrafficFromThisEndpoint
-Pod.v1(hipstershop/frontend-5db5d7b788-j2rw5),true,true,true,false,true,true,false,GlobalNetworkPolicy(security.pci-whitelist);GlobalNetworkPolicy(security.security-default-pass);GlobalNetworkPolicy(default.default-deny);GlobalNetworkPolicy(platform.allow-dns);GlobalNetworkPolicy(platform.platform-default-pass);NetworkPolicy(hipstershop/app-hipstershop.frontend);GlobalNetworkPolicy(platform.tenant-hipstershop);GlobalNetworkPolicy(security.pci-restrict),frontend-5db5d7b788-j2rw5,,Private
-
