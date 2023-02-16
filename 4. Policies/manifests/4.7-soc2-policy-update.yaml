@@ -1,0 +1,34 @@
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: security.soc2-restrict
+spec:
+  tier: security
+  order: 75
+  selector: soc2 == "true"
+  namespaceSelector: ""
+  serviceAccountSelector: ""
+  ingress:
+    - action: Pass
+      source:
+        selector: soc2 == "true"
+      destination: {}
+    - action: Deny
+      source:
+        selector: soc2 != "true"
+      destination: {}
+  egress:
+    - action: Pass
+      source: {}
+      destination:
+        selector: soc2 == "true"
+    - action: Deny
+      source: {}
+      destination:
+        selector: soc2 != "true"
+  doNotTrack: false
+  applyOnForward: false
+  preDNAT: false
+  types:
+    - Ingress
+    - Egress

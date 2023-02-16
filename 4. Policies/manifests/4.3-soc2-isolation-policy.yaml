@@ -1,0 +1,74 @@
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: security.soc2-allowlist
+spec:
+  tier: security
+  order: 0
+  selector: all()
+  namespaceSelector: ""
+  serviceAccountSelector: ""
+  ingress:
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: app == "frontend"
+        ports:
+          - "8080"
+  egress:
+    - action: Allow
+      protocol: UDP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        ports:
+          - "53"
+    - action: Allow
+      protocol: TCP
+      source: {}
+      destination:
+        selector: k8s-app == "kube-dns"
+        ports:
+          - "53"
+  doNotTrack: false
+  applyOnForward: false
+  preDNAT: false
+  types:
+    - Ingress
+    - Egress
+---
+apiVersion: projectcalico.org/v3
+kind: GlobalNetworkPolicy
+metadata:
+  name: security.soc2-restrict
+spec:
+  tier: security
+  order: 75
+  selector: soc2 == "true"
+  namespaceSelector: ""
+  serviceAccountSelector: ""
+  ingress:
+    - action: Allow
+      source:
+        selector: soc2 == "true"
+      destination: {}
+    - action: Deny
+      source:
+        selector: soc2 != "true"
+      destination: {}
+  egress:
+    - action: Allow
+      source: {}
+      destination:
+        selector: soc2 == "true"
+    - action: Deny
+      source: {}
+      destination:
+        selector: soc2 != "true"
+  doNotTrack: false
+  applyOnForward: false
+  preDNAT: false
+  types:
+    - Ingress
+    - Egress

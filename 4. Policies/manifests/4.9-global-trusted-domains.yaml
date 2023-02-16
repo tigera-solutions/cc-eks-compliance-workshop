@@ -1,0 +1,12 @@
+kind: GlobalNetworkSet
+apiVersion: projectcalico.org/v3
+metadata:
+  name: global-trusted-domains
+  labels:
+    external-endpoints: global-trusted
+spec:
+  nets: []
+  allowedEgressDomains:
+    - facebook.com
+    - '*.tigera.io'
+    - tigera.io
