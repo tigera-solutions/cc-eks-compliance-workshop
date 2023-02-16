@@ -117,5 +117,6 @@
 
 [:arrow_right:2. Connect cluster to Calico Cloud](../2.%20Connect%20CC/readme.md) <br>
 
-[:arrow_left:0. Getting Started](../0.%20Getting%20Started/readme.md)  
+[:arrow_left:0. Getting Started](../0.%20Getting%20Started/readme.md)
+
 [:leftwards_arrow_with_hook: Back to Main](../README.md)  
