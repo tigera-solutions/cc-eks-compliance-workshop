@@ -113,6 +113,12 @@
    
    > output should contain "mode": "transparent"
 
+
+## Install calicoctl tool for use in later labs
+Follow the instructions for your platform and method of choice [HERE](https://docs.tigera.io/calico/3.25/operations/calicoctl/install)<br>
+
+>>>**Note:** Installing the binary is the easiest way for the purpose of this lab
+
 ---
 
 [:arrow_right:2. Connect cluster to Calico Cloud](../2.%20Connect%20CC/readme.md) <br>
