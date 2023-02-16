@@ -245,7 +245,7 @@ EOF
 
 Now that we have our foundation in the Policy Tiers, we need to start applying policy to restrict traffic. The first policy we will apply will only allow traffic to flow between pods with the label of 'soc2=true'. Pods without the 'soc2=true' label will also be able to freely communicate with each other.
 
-We will also add a 'soc2-allowlist' policy because we need a way to allow traffic to the frontend of the application as well as allowing DNS lookups from the SOC2 pods to the kube-dns system.
+We will also add a 'soc2-allowlist' policy because we need a way to allow traffic to the frontend of the application as well as allowing DNS lookups from the SOC2 pods to the kube-dns system. We are also adding the metrics-server ingress port so that the AKS konnectivity pod and other pods can call it for getting node and pod metrics as needed.
 
 ```yaml
 kubectl apply -f -<<EOF
