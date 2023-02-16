@@ -133,6 +133,28 @@ EOF
 [SOC2 Network Access Endpoints Example](reports/daily-soc2-network-access-endpoints.csv)<br>
 [SOC2 Network Access Summary Example](reports/daily-soc2-network-access-summary.csv)
 
+
+### Policy Audit
+
+The following report schedules a policy audit of the cluster at the frequency of your choosing
+
+```yaml
+kubectl apply -f -<<EOF
+apiVersion: projectcalico.org/v3
+kind: GlobalReport
+metadata:
+  name: daily-hipstershop-policy-audit
+spec:
+  reportType: policy-audit
+  endpoints:
+    namespaces:
+      names:
+        - hipstershop
+  schedule: 0 0 * * *
+EOF
+```
+
+
 ### Generate reports manually
 
 ```

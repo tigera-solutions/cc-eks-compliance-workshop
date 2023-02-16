@@ -1,9 +1,9 @@
 apiVersion: projectcalico.org/v3
 kind: GlobalReport
 metadata:
-  name: daily-pci-ingress-network-access
+  name: daily-soc2-network-access
 spec:
   reportType: network-access
   endpoints:
-    selector: infra-pci-ingress == "true"
-  schedule: 0 0 * * *
+    selector: soc2 == "true"
+  schedule: 0 1 * * *

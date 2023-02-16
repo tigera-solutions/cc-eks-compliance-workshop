@@ -1,9 +1,9 @@
 apiVersion: projectcalico.org/v3
 kind: GlobalReport
 metadata:
-  name: daily-tenant-hipstershop-networkaccess
+  name: daily-soc2-inventory
 spec:
   reportType: inventory
   endpoints:
-    selector: pci == "true"
-  schedule: 0 0 * * *
+    selector: soc2 == "true"
+  schedule: 8 6 * * *
