@@ -1117,10 +1117,6 @@ From the Policy Edit screen, select Enforce.
 
 Now our policies are complete. 
 
-**The full version of the policy can be found here:**
-
-> Manifest File: [compliance-workshop-full-policy.yaml](manifests/compliance-workshop-full-policy.yaml)
-
 ### Reference Documentation
 
 [Calico Cloud - Policy Tiers](https://docs.tigera.io/calico-cloud/network-policy/policy-tiers/tiered-policy)
