@@ -162,7 +162,7 @@ EOF
 ### Generate reports manually
 
 - Change values as needed in the ```generate-reports.sh``` script
-- Run the script ```bash generate-reports.sh```
+- Run the script ```bash 5.\ Reports/generate-reports.sh```
 - Check the Calico Cloud UI for the new reports to be populated
 
 ## Reference Documentation

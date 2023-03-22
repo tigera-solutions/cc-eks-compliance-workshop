@@ -22,4 +22,4 @@ sed -e "s?<CALICO_VERSION>?$CALICO_VERSION?g" \
   -e "s?<POLICY_AUDIT_REPORT_NAME>?$POLICY_AUDIT_REPORT_NAME?g" \
   -e "s?<TIGERA_COMPLIANCE_REPORT_START_TIME>?$START_TIME?g" \
   -e "s?<TIGERA_COMPLIANCE_REPORT_END_TIME>?$END_TIME?g" \
-  manifests/compliance-reporter-pod.yaml | kubectl apply -f -
+  5.\ Reports/manifests/compliance-reporter-pod.yaml | kubectl apply -f -
