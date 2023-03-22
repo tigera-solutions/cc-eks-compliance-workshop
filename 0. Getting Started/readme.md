@@ -4,51 +4,32 @@
 
 The following are the basic requirements to **start** the workshop.
 
-* Azure Account [Azure Portal](https://portal.azure.com)
+* AWS Account [AWS Portal](https://aws.amazon.com/console/)
 * Git [Git SCM](https://git-scm.com/downloads)
-* Azure Cloud Shell [https://shell.azure.com](https://shell.azure.com)
-
+* AWS CLI [Getting Started](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-prereqs.html)
+* Access/Secret Key [Setup](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-prereqs.html#getting-started-prereqs-keys)
+* kubectl installed [Instructions](https://kubernetes.io/docs/tasks/tools/)
+  
 ## Instructions
 
-1. Login to Azure Portal at http://portal.azure.com.
-2. Open the Azure Cloud Shell and choose Bash Shell (do not choose Powershell)
-
-   ![img-cloud-shell](https://user-images.githubusercontent.com/104035488/214944180-0b72595f-b58d-445d-9bde-2530bd491ace.png)
-
-3. The first time Cloud Shell is started will require you to create a storage account.
-
-4. Once your cloud shell is started, clone the workshop repo into the cloud shell environment
+1. Clone the workshop repo into the your local environment
 
    ```bash
-   git clone https://github.com/tigera-solutions/cc-aks-compliance.git && \
-   cd cc-aks-compliance
+   git clone https://github.com/tigera-solutions/cc-eks-compliance-workshop.git && \
+   cd cc-eks-compliance-workshop
    ```
 
-   > Note: In the cloud shell, you are automatically logged into your Azure subscription.
+2. Ensure you are using the correct AWS account and IAM role you want to deploy your EKS cluster to.
 
-5. Ensure you are using the correct Azure subscription you want to deploy AKS to.
+   View account #
 
-   View subscriptions
    ```bash
-   az account list
+   aws sts get-caller-identity --query "Account" --output text
    ```
 
-   Verify selected subscription
-   ```bash
-   az account show
-   ```
+3. Setup AWS credentials file as per [the instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html) by running ```aws configure```
 
-   Set correct subscription (if needed)
-   ```bash
-   az account set --subscription <subscription_id>
-   ```
-   
-   Verify correct subscription is now set
-   ```bash
-   az account show
-   ```
-
-6. Configure the kubectl autocomplete.
+4. (Optional) Configure the kubectl autocomplete (Example below given for ```bash```)
 
    ```bash
    source <(kubectl completion bash) # set up autocomplete in bash into the current shell, bash-completion package should be installed first.
@@ -66,6 +47,6 @@ The following are the basic requirements to **start** the workshop.
 
 ---
 
-[:arrow_right: 1. Deploy AKS](../1.%20Deploy%20AKS/readme.md) <br>
+[:arrow_right: 1. Deploy EKS](../1.%20Deploy%20EKS/readme.md) <br>
  
 [:leftwards_arrow_with_hook: Back to Main](../README.md)

@@ -7,8 +7,6 @@ We will be using the ```eksctl``` CLI tool with a config file to deploy the EKS 
 - Install AWS CLI as per the [official instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
 - Install ```eksctl``` and setup your AWS account credentials as per the [official instructions](https://github.com/weaveworks/eksctl#installation)
 
-0. (Optional) Create and have an SSH public key ready if you want to enable SSH access to the worker nodes
-
 1. Create a config YAML file to be used by ```eksctl```
 
    ```bash
@@ -30,9 +28,6 @@ We will be using the ```eksctl``` CLI tool with a config file to deploy the EKS 
       maxSize: 3
       desiredCapacity: 2
       volumeSize: 40
-      ssh:
-         allow: true
-         publicKeyPath: ~/.ssh/aws_id_rsa.pub
       labels: {role: worker}
       tags:
          nodegroup-role: worker

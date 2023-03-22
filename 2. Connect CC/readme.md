@@ -104,6 +104,6 @@ When you change the cluster, the whole Calico Cloud context will change immediat
 
 [:arrow_right:3. Deploy Demo Microservices App](../3.%20Deploy%20App/readme.md)<br>
 
-[:arrow_left: 1. Deploy an AKS cluster](../1.%20Deploy%20AKS/readme.md)
+[:arrow_left: 1. Deploy an EKS cluster](../1.%20Deploy%20EKS/readme.md)
 
 [:leftwards_arrow_with_hook: Back to Main](../README.md)  
