@@ -37,8 +37,8 @@ operations), and CC8 (change management) when trying to comply with SOC 2 standa
 We will be focusing on securing a microservices based application and then providing audit and reporting of the controls that are put in place adhering to SOC2 controls. To accomplish this we will focus on these areas:
 
 - [Section 0. Getting Started](0.%20Getting%20Started/readme.md)
-- [Section 1. Deploy AKS](1.%20Deploy%20AKS/readme.md)
-- [Section 2. Connect AKS Cluster to Calico Cloud](2.%20Connect%20CC/readme.md)
+- [Section 1. Deploy EKS](1.%20Deploy%20EKS/readme.md)
+- [Section 2. Connect EKS Cluster to Calico Cloud](2.%20Connect%20CC/readme.md)
 - [Section 3. Deploy Demo Microservices App](3.%20Deploy%20App/readme.md)
 - [Section 4. Apply Security Policies](4.%20Policies/readme.md)
 - [Section 5. Reports and Visibility](5.%20Reports/readme.md)

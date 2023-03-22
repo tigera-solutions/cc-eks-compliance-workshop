@@ -162,16 +162,16 @@ EOF
 ELASTIC_INDEX_SUFFIX=$(kubectl get deployment -n tigera-intrusion-detection intrusion-detection-controller -ojson | jq -r '.spec.template.spec.containers[0].env[] | select(.name == "CLUSTER_NAME").value')
 
 # on MacOS
-START_TIME=$(date -v -2H -u +'%Y-%m-%dT%H:%M:%SZ')
-END_TIME=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
+MAC_START_TIME=$(date -v -2H -u +'%Y-%m-%dT%H:%M:%SZ')
+MAC_END_TIME=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 # on Linux
 START_TIME=$(date -d '-2 hours' -u +'%Y-%m-%dT%H:%M:%SZ')
 END_TIME=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
 
 # replace variables in YAML and deploy reporter jobs
 sed   -e "s?<ELASTIC_INDEX_SUFFIX>?$ELASTIC_INDEX_SUFFIX?g" \
-  -e "s?<TIGERA_COMPLIANCE_REPORT_START_TIME>?$START_TIME?g" \
-  -e "s?<TIGERA_COMPLIANCE_REPORT_START_TIME>?$END_TIME?g" \
+  -e "s?<TIGERA_COMPLIANCE_REPORT_START_TIME>?$MAC_START_TIME?g" \
+  -e "s?<TIGERA_COMPLIANCE_REPORT_START_TIME>?$MAC_END_TIME?g" \
   5.\ Reports/manifests/compliance-reporter-pod.yaml | kubectl apply -f -
 ```
 
