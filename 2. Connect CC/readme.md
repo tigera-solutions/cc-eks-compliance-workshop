@@ -1,6 +1,6 @@
 # 2. Connect AKS Cluster to Calico Cloud
 
-> **Note**: In order to complete this part, you will need to a [Calico Cloud account](https://www.calicocloud.io/). If you are participating in a live workshop, you will receive an invite with the information to login into an active Calico Cloud environment and join your AKS cluster in there.  
+> **Note**: In order to complete this part, you will need to have a [Calico Cloud account](https://www.calicocloud.io/). If you are participating in a live workshop, you will receive an invite with the information to login into an active Calico Cloud environment and join your EKS cluster in there.  
 If you are running this workshop in a self-paced mode, you can create an Calico Cloud environment following the steps [here](˚create-calicloud.md).  
 
 Issues with being unable to navigate menus in the UI are often due to browsers blocking scripts - please ensure that you disabled all blocker scripts.
@@ -21,7 +21,10 @@ Issues with being unable to navigate menus in the UI are often due to browsers b
 
 1. The welcome screen will allow you to choose among four use cases and will provide a guided tour for each use case. After that you can proceed to connect your first cluster. This option directs you to the **Managed Clusters** section. Click on the "**Connect Cluster**" button to start the process.
 
-   The Connect Cluster window will allow you to choose a name to identify your cluster in Calico Cloud and select which platform you are running the cluster on. The next window presents a link for you to review the cluster requirements for Calico Cloud. A kubectl command to run the installation script will be generated, you need to copy and apply this command in your cluster.
+   **Note:**
+   The Connect Cluster window will allow you to choose a name to identify your cluster in Calico Cloud and select which platform you are running the cluster on. Choose a unique name (prefixing or suffixing your own name or a username unique to you) in a shared workshop CC environment so that you can distinguish your cluster from other users'!
+
+   The next window presents a link for you to review the cluster requirements for Calico Cloud. A kubectl command to run the installation script will be generated, you need to copy and apply this command in your cluster.
 
    ![registering_get_key](https://user-images.githubusercontent.com/104035488/188036064-f85cac4f-66c0-4c09-bdd3-67922640679d.gif)
 

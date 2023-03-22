@@ -414,7 +414,7 @@ And connectivity to the 'frontend':
 bash-5.1# curl -I 10.0.41.230
 HTTP/1.1 200 OK
 Set-Cookie: shop_session-id=1939f999-1237-4cc7-abdb-949423eae483; Max-Age=172800
-Date: Wed, 15 Feb 2023 23:54:25 GMT
+Date: Wed, 21 Mar 2023 23:54:25 GMT
 Content-Type: text/html; charset=utf-8
 ```
 

@@ -14,7 +14,7 @@ NODE_NAME=$(kubectl get nodes -o jsonpath='{.items[*].status.addresses[?(@.type=
 
 This command starts a privileged container on your node and connects to it over SSH:
 ```bash
-kubectl debug node/$NODE_NAME -it --image=mcr.microsoft.com/aks/fundamental/base-ubuntu:v0.0.11
+kubectl debug node/$NODE_NAME -it --image=ubuntu
 ```
 Output will be like:
 
@@ -40,7 +40,7 @@ The output should look something like this:
 wireguard             217088  0
 ```
 
-Now that we've enabled the wireguard module on the 3 nodes we can enable encrpytion through the 'felixconfiguration' in Calico.
+Now that we've enabled the wireguard module on the 3 nodes we can enable encryption through the 'felixconfiguration' in Calico.
 
 ## Enable End to End Encryption
 
@@ -59,17 +59,17 @@ kubectl get nodes -o yaml | grep 'kubernetes.io/hostname\|Wireguard'
 Which will give us the following output showing the nodes Wireguard public key
 
 ```bash
-      projectcalico.org/WireguardPublicKey: 5qukt1/mog1Eq3B3R1AdwZMbrYTgxtseR4doUxFbckY=
-      kubernetes.io/hostname: aks-nodepool1-37054976-vmss000002
-      projectcalico.org/WireguardPublicKey: Ib4VKvg3cXgA59v66Q2q/+f5VQ9ub7PCj8RPyQsvfDg=
-      kubernetes.io/hostname: aks-nodepool1-37054976-vmss000003
+      projectcalico.org/WireguardPublicKey: wSngky4GoCupoZvCVOl+KudFhngwDETfAVZXswT5bCU=
+      kubernetes.io/hostname: ip-192-168-18-242.ec2.internal
+      projectcalico.org/WireguardPublicKey: A1iY1ApUh0cWd6R9nDp7lBo1iTmdAKaY5B1aIVKTEg8=
+      kubernetes.io/hostname: ip-192-168-48-126.ec2.internal
 ```
 
 On each node we can also view the new interface created by Wireguard:
 
 ```
 root@aks-nodepool1-37054976-vmss000002:/# ifconfig | grep wireguard
-wireguard.cali: flags=209<UP,POINTOPOINT,RUNNING,NOARP>  mtu 1340
+wireguard.cali: flags=209<UP,POINTOPOINT,RUNNING,NOARP>  mtu 8941
 ```
 
 ## Enable WireGuard Statistics

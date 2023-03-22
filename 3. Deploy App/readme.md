@@ -94,8 +94,8 @@ Now we'll use curl to verify we can reach the web frontend of the application (y
 ```bash
 bash-5.1# curl -I 10.49.14.192 
 HTTP/1.1 200 OK
-Set-Cookie: shop_session-id=90f6ea0d-9b4f-4bea-9abd-5f347509b6a7; Max-Age=172800
-Date: Wed, 15 Feb 2023 22:58:54 GMT
+Set-Cookie: shop_session-id=3cf5bfb7-be01-4ba4-bd15-331bad6d2c0d; Max-Age=172800
+Date: Mon, 20 Mar 2023 23:49:31 GMT
 Content-Type: text/html; charset=utf-8
 ```
 Exit the shell by typing **exit**
