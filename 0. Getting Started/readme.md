@@ -25,7 +25,17 @@ The following pre-requisites apply if you are using your own (local) environment
    cd cc-eks-compliance-workshop
    ```
 
-2. Ensure you are using the correct AWS account and IAM role you want to deploy your EKS cluster to.
+2. Setup AWS credentials file as per [the instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html) by running ```aws configure```
+   For example:
+
+   ```bash
+   AWS Access Key ID [none]: <redacted>
+   AWS Secret Access Key [none]: <redacted>
+   Default region name [none]: us-east-1
+   Default output format [none]:
+   ```
+
+3. Ensure you are using the correct AWS account and IAM role you want to deploy your EKS cluster to.
 
    View account #
 
@@ -35,19 +45,9 @@ The following pre-requisites apply if you are using your own (local) environment
 
    should output the user account number.
 
-3. Setup AWS credentials file as per [the instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-quickstart.html) by running ```aws configure```
-   For example: 
-
-   ```bash
-   AWS Access Key ID [none]: <redacted>
-   AWS Secret Access Key [none]: <redacted>
-   Default region name [none]: us-east-1
-   Default output format [none]:
-   ```
-
 4. If using local environment, make sure ```kubectl``` is installed as per the instructions for your environment: [Instructions](https://kubernetes.io/docs/tasks/tools/)
 
-4. (Optional) Configure the kubectl autocomplete (Example below given for ```bash```)
+5. (Optional) Configure the kubectl autocomplete (Example below given for ```bash```)
 
    ```bash
    source <(kubectl completion bash) # set up autocomplete in bash into the current shell, bash-completion package should be installed first.
