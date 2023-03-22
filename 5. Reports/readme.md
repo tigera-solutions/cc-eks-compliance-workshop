@@ -99,7 +99,9 @@ metadata:
 spec:
   reportType: inventory
   endpoints:
-    selector: soc2 == "true"
+    namespaces:
+      names:
+        - hipstershop
   schedule: 8 6 * * *
 EOF
 ```
@@ -125,7 +127,9 @@ metadata:
 spec:
   reportType: network-access
   endpoints:
-    selector: soc2 == "true"
+    namespaces:
+      names:
+        - hipstershop
   schedule: 0 1 * * *
 EOF
 ```
@@ -157,24 +161,9 @@ EOF
 
 ### Generate reports manually
 
-```
-# for managed clusters you must set ELASTIC_INDEX_SUFFIX var to cluster name in the reporter pod template YAML
-ELASTIC_INDEX_SUFFIX=$(kubectl get deployment -n tigera-intrusion-detection intrusion-detection-controller -ojson | jq -r '.spec.template.spec.containers[0].env[] | select(.name == "CLUSTER_NAME").value')
-
-# on MacOS
-MAC_START_TIME=$(date -v -2H -u +'%Y-%m-%dT%H:%M:%SZ')
-MAC_END_TIME=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-# on Linux
-START_TIME=$(date -d '-2 hours' -u +'%Y-%m-%dT%H:%M:%SZ')
-END_TIME=$(date -u +'%Y-%m-%dT%H:%M:%SZ')
-
-# replace variables in YAML and deploy reporter jobs
-sed   -e "s?<ELASTIC_INDEX_SUFFIX>?$ELASTIC_INDEX_SUFFIX?g" \
-  -e "s?<TIGERA_COMPLIANCE_REPORT_START_TIME>?$MAC_START_TIME?g" \
-  -e "s?<TIGERA_COMPLIANCE_REPORT_START_TIME>?$MAC_END_TIME?g" \
-  5.\ Reports/manifests/compliance-reporter-pod.yaml | kubectl apply -f -
-```
-
+- Change values as needed in the ```generate-reports.sh``` script
+- Run the script ```bash generate-reports.sh```
+- Check the Calico Cloud UI for the new reports to be populated
 
 ## Reference Documentation
 

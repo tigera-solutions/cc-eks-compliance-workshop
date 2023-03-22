@@ -21,24 +21,24 @@ spec:
     # Modify this image name, if you have re-tagged the image and are using a local
     # docker image repository.
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    image: quay.io/tigera/compliance-reporter:v3.15.1
+    image: quay.io/tigera/compliance-reporter:<CALICO_VERSION>
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     env:
       # Modify this value with name of an existing globalreport resource.
       # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     - name: TIGERA_COMPLIANCE_REPORT_NAME
-      value: daily-soc2-inventory
+      value: <INVENTORY_REPORT_NAME>
       # Modify these values with the start and end time frame that should be reported on.
       # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     - name: TIGERA_COMPLIANCE_REPORT_START_TIME
-      value: 2023-02-16T10:24:59Z
-    - name: TIGERA_COMPLIANCE_END_TIME
-      value: 2023-02-16T12:25:06Z
+      value: <TIGERA_COMPLIANCE_REPORT_START_TIME>
+    - name: TIGERA_COMPLIANCE_REPORT_END_TIME
+      value: <TIGERA_COMPLIANCE_REPORT_END_TIME>
       # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     - name: LOG_LEVEL
       value: "warning"
     - name: ELASTIC_INDEX_SUFFIX
-      value: pkgr91xc.kartik-aks-compliance-workshop
+      value: <ELASTIC_INDEX_SUFFIX>
     - name: ELASTIC_SCHEME
       value: https
     - name: ELASTIC_HOST
@@ -105,24 +105,24 @@ spec:
     # Modify this image name, if you have re-tagged the image and are using a local
     # docker image repository.
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    image: quay.io/tigera/compliance-reporter:v3.15.1
+    image: quay.io/tigera/compliance-reporter:<CALICO_VERSION>
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     env:
       # Modify this value with name of an existing globalreport resource.
       # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     - name: TIGERA_COMPLIANCE_REPORT_NAME
-      value: daily-soc2-network-access
+      value: <NETWORK_ACCESS_REPORT_NAME>
       # Modify these values with the start and end time frame that should be reported on.
       # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     - name: TIGERA_COMPLIANCE_REPORT_START_TIME
-      value: 2023-02-16T10:24:59Z
-    - name: TIGERA_COMPLIANCE_END_TIME
-      value: 2023-02-16T12:25:06Z
+      value: <TIGERA_COMPLIANCE_REPORT_START_TIME>
+    - name: TIGERA_COMPLIANCE_REPORT_END_TIME
+      value: <TIGERA_COMPLIANCE_REPORT_END_TIME>
       # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     - name: LOG_LEVEL
       value: "warning"
     - name: ELASTIC_INDEX_SUFFIX
-      value: pkgr91xc.kartik-aks-compliance-workshop
+      value: <ELASTIC_INDEX_SUFFIX>
     - name: ELASTIC_SCHEME
       value: https
     - name: ELASTIC_HOST
@@ -189,24 +189,24 @@ spec:
     # Modify this image name, if you have re-tagged the image and are using a local
     # docker image repository.
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
-    image: quay.io/tigera/compliance-reporter:v3.15.1
+    image: quay.io/tigera/compliance-reporter:<CALICO_VERSION>
     # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     env:
       # Modify this value with name of an existing globalreport resource.
       # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     - name: TIGERA_COMPLIANCE_REPORT_NAME
-      value: daily-hipstershop-policy-audit
+      value: <POLICY_AUDIT_REPORT_NAME>
       # Modify these values with the start and end time frame that should be reported on.
       # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     - name: TIGERA_COMPLIANCE_REPORT_START_TIME
-      value: 2023-02-16T10:24:59Z
-    - name: TIGERA_COMPLIANCE_END_TIME
-      value: 2023-02-16T12:25:06Z
+      value: <TIGERA_COMPLIANCE_REPORT_START_TIME>
+    - name: TIGERA_COMPLIANCE_REPORT_END_TIME
+      value: <TIGERA_COMPLIANCE_REPORT_END_TIME>
       # ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
     - name: LOG_LEVEL
       value: "warning"
     - name: ELASTIC_INDEX_SUFFIX
-      value: pkgr91xc.kartik-aks-compliance-workshop
+      value: <ELASTIC_INDEX_SUFFIX>
     - name: ELASTIC_SCHEME
       value: https
     - name: ELASTIC_HOST
