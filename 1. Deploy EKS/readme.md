@@ -18,8 +18,8 @@ We will be using the ```eksctl``` CLI tool with a config file to deploy the EKS 
 
 1. Create a config YAML file to be used by ```eksctl```
 
-   ```bash
-   cat <<EOF > ./cc-eks-compliance-workshop.yaml
+```bash
+cat <<EOF > ./cc-eks-compliance-workshop.yaml
    apiVersion: eksctl.io/v1alpha5
    kind: ClusterConfig
    availabilityZones:
@@ -32,16 +32,16 @@ We will be using the ```eksctl``` CLI tool with a config file to deploy the EKS 
       
    managedNodeGroups:
       - name: cc-eks-compliance-workshop-ng-1
-      instanceType: c5.large
-      minSize: 2
-      maxSize: 3
-      desiredCapacity: 2
-      volumeSize: 40
-      labels: {role: worker}
-      tags:
-         nodegroup-role: worker
-   EOF
-   ```
+        instanceType: c5.large
+        minSize: 2
+        maxSize: 3
+        desiredCapacity: 2
+        volumeSize: 40
+        labels: {role: worker}
+        tags:
+           nodegroup-role: worker
+EOF
+```
 
 2. Create the EKS cluster with AWS VPC CNI using eksctl.
 
