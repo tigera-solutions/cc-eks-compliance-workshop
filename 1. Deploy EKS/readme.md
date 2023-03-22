@@ -1,11 +1,20 @@
 # 1. Deploy an AWS EKS Cluster
 
-We will be using the ```eksctl``` CLI tool with a config file to deploy the EKS cluster
+We will be using the ```eksctl``` CLI tool with a config file to deploy the EKS cluster with AWS VPC CNI. 
+```eksctl``` needs to installed whether you are using a local environment or AWS CloudShell.
 
 ## Pre-requisites
 
-- Install AWS CLI as per the [official instructions](https://docs.aws.amazon.com/cli/latest/userguide/getting-started-install.html)
-- Install ```eksctl``` and setup your AWS account credentials as per the [official instructions](https://github.com/weaveworks/eksctl#installation)
+- Install ```eksctl``` and setup as per the [official instructions](https://github.com/weaveworks/eksctl#installation) for your environment of choice or AWS CloudShell (Linux)
+
+  The following instructions are for installing it into AWS CloudShell (which is a Linux environment)
+  
+  ```bash
+  curl --silent --location "https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+  sudo mv /tmp/eksctl /usr/local/bin
+  ```
+
+## EKS Cluster Installation
 
 1. Create a config YAML file to be used by ```eksctl```
 
@@ -34,7 +43,7 @@ We will be using the ```eksctl``` CLI tool with a config file to deploy the EKS 
    EOF
    ```
 
-2. Create the EKS cluster with AWS CNI using eksctl.
+2. Create the EKS cluster with AWS VPC CNI using eksctl.
 
    ```bash
    eksctl create cluster -f cc-eks-compliance-workshop.yaml
@@ -77,11 +86,11 @@ We will be using the ```eksctl``` CLI tool with a config file to deploy the EKS 
 
    The output will ne something similar to the this:
 
-   <pre>
+   ```bash
    NAME                             STATUS   ROLES    AGE   VERSION
    ip-192-168-18-242.ec2.internal   Ready    <none>   97m   v1.24.10-eks-48e63af
    ip-192-168-48-126.ec2.internal   Ready    <none>   97m   v1.24.10-eks-48e63af
-   </pre>
+   ```
 
    To see more details about your cluster:
 
@@ -92,8 +101,8 @@ We will be using the ```eksctl``` CLI tool with a config file to deploy the EKS 
    The output will be something similar to the this:
 
    ```bash
-   Kubernetes control plane is running at https://F1495ABA18A90EDADB217214FDB40098.sk1.us-east-1.eks.amazonaws.com
-   CoreDNS is running at https://F1495ABA18A90EDADB217214FDB40098.sk1.us-east-1.eks.amazonaws.com/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
+   Kubernetes control plane is running at https://<redacted>.us-east-1.eks.amazonaws.com
+   CoreDNS is running at https://<redacted>.us-east-1.eks.amazonaws.com/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
 
    To further debug and diagnose cluster problems, use 'kubectl cluster-info dump'.
    ```
@@ -102,9 +111,15 @@ We will be using the ```eksctl``` CLI tool with a config file to deploy the EKS 
 
 ## Install calicoctl tool for use in later labs
 
-Follow the instructions for your platform and method of choice [HERE](https://docs.tigera.io/calico/3.25/operations/calicoctl/install)<br>
+Follow the instructions for your platform and method of choice [HERE](https://docs.tigera.io/calico/3.24/operations/calicoctl/install#install-calicoctl-as-a-binary-on-a-single-host)<br>
 
 >>>**Note:** Installing the binary is the easiest way for the purpose of this lab
+
+   ```bash
+   curl -L https://github.com/projectcalico/calico/releases/latest/download/calicoctl-linux-amd64 -o calicoctl
+   sudo mv calicoctl /usr/local/bin
+   sudo chmod +x /usr/local/bin/calicoctl
+   ```
 
 ---
 
