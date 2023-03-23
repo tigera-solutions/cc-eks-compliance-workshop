@@ -21,8 +21,8 @@ Issues with being unable to navigate menus in the UI are often due to browsers b
 
 1. The welcome screen will allow you to choose among four use cases and will provide a guided tour for each use case. After that you can proceed to connect your first cluster. This option directs you to the **Managed Clusters** section. Click on the "**Connect Cluster**" button to start the process.
 
-   **Note:**
-   The Connect Cluster window will allow you to choose a name to identify your cluster in Calico Cloud and select which platform you are running the cluster on. Choose a unique name (prefixing or suffixing your own name or a username unique to you) in a shared workshop CC environment so that you can distinguish your cluster from other users'!
+   > **IMPORTANT:**
+   > The Connect Cluster window will allow you to choose a name to identify your cluster in Calico Cloud and select which platform you are running the cluster on. Choose a unique name (prefixing or suffixing your own name or a username unique to you) in a shared workshop CC environment so that you can distinguish your cluster from other users'!
 
    The next window presents a link for you to review the cluster requirements for Calico Cloud. A kubectl command to run the installation script will be generated, you need to copy and apply this command in your cluster.
 
