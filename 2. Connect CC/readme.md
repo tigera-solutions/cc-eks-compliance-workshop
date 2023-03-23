@@ -1,5 +1,19 @@
 # 2. Connect AKS Cluster to Calico Cloud
 
+## What is Calico Cloud
+
+- A single pane of glass across multi-cluster and multi-cloud Kubernetes environments to deploy a standard set of egress access controls, enforce security policies for compliance, and observe and troubleshoot applications
+
+- End-to-end visibility, ingress and egress access control, and security compliance enforcement from client to serving pod, using Kubernetes context-enhanced networking flow logs data.
+
+- Ability to automatically scale with the managed clusters in your environment to ensure uninterrupted real-time visibility
+
+[Reference Architecture](https://docs.tigera.io/calico-cloud/get-started/connect/cc-arch-diagram)
+
+[What Happens when you connect a cluster to Calico Cloud](https://docs.tigera.io/calico-cloud/get-started/connect/connect-cluster)
+
+## Prerequisite
+
 > **Note**: In order to complete this part, you will need to have a [Calico Cloud account](https://www.calicocloud.io/). If you are participating in a live workshop, you will receive an invite with the information to login into an active Calico Cloud environment and join your EKS cluster in there.  
 If you are running this workshop in a self-paced mode, you can create an Calico Cloud environment following the steps [here](˚create-calicloud.md).  
 
