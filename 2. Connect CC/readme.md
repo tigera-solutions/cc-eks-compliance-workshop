@@ -26,7 +26,9 @@ Issues with being unable to navigate menus in the UI are often due to browsers b
 
    The next window presents a link for you to review the cluster requirements for Calico Cloud. A kubectl command to run the installation script will be generated, you need to copy and apply this command in your cluster.
 
-   ![registering_get_key](https://user-images.githubusercontent.com/104035488/188036064-f85cac4f-66c0-4c09-bdd3-67922640679d.gif)
+   ![connect_cluster](images/connect_cluster.png)
+
+   ![connect_details](images/connect_details.png)
 
 2. Run the installation script in your cluster. Script should look similar to this:
     
