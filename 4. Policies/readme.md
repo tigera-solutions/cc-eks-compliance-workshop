@@ -72,6 +72,8 @@ Now that the pods are labeled, lets start applying policies to them.
 
 Tiers are a hierarchical construct used to group policies and enforce higher precedence policies that cannot be circumvented by other teams. As part of your microsegmentation strategy, tiers let you apply identity-based protection to workloads and hosts. All Calico Enterprise and Kubernetes network policies reside in tiers.
 
+![tiers](images/tiers.png)
+
 For this workshop, we'll be creating 3 tiers in the cluster and utilizing the default tier as well:
 
 **security** - Global security tier with controls such as SOC2 restrictions.
