@@ -411,11 +411,8 @@ bash-5.1# nc -zvw 3 10.0.214.232 7070
 ```
 And connectivity to the 'frontend':
 ```bash
-bash-5.1# curl -I 10.0.41.230
+bash-5.1# curl -Is 10.0.41.230 | grep HTTP
 HTTP/1.1 200 OK
-Set-Cookie: shop_session-id=1939f999-1237-4cc7-abdb-949423eae483; Max-Age=172800
-Date: Wed, 21 Mar 2023 23:54:25 GMT
-Content-Type: text/html; charset=utf-8
 ```
 
 As expected, we can reach both services from a pod with the soc2=true label.
