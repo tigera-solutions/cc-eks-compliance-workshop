@@ -5,5 +5,7 @@ metadata:
 spec:
   reportType: network-access
   endpoints:
-    selector: soc2 == "true"
+    namespaces:
+      names:
+        - hipstershop
   schedule: 0 1 * * *

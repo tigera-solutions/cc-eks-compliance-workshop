@@ -221,9 +221,7 @@ metadata:
 spec:
   tier: default
   order: 1100
-  selector: ''
-  namespaceSelector: ''
-  serviceAccountSelector: ''
+  selector: "projectcalico.org/namespace in {'hipstershop','default'}"
   doNotTrack: false
   applyOnForward: false
   preDNAT: false

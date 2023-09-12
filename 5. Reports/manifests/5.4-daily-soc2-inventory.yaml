@@ -5,5 +5,7 @@ metadata:
 spec:
   reportType: inventory
   endpoints:
-    selector: soc2 == "true"
+    namespaces:
+      names:
+        - hipstershop
   schedule: 8 6 * * *
