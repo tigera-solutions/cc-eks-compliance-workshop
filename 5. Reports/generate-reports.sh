@@ -1,13 +1,13 @@
 #!/usr/bin/env bash
 
 # get Calico version
-CALICO_VERSION=v3.16.1
+CALICO_VERSION=v3.17.1
 # CALICO_VERSION=$(kubectl get clusterinformation default -ojsonpath='{.spec.cnxVersion}')
 
 # report names
 INVENTORY_REPORT_NAME='daily-soc2-inventory'
 NETWORK_ACCESS_REPORT_NAME='daily-soc2-network-access'
-POLICY_AUDIT_REPORT_NAME='daily-hipstershop-policy-audit-report'
+POLICY_AUDIT_REPORT_NAME='daily-hipstershop-policy-audit'
 CIS_BENCHMARK_NAME='daily-cis-benchmark'
 
 # for managed clusters you must set ELASTIC_INDEX_SUFFIX var to cluster name in the reporter pod template YAML

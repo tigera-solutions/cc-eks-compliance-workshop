@@ -4,8 +4,4 @@ metadata:
   name: daily-soc2-inventory
 spec:
   reportType: inventory
-  endpoints:
-    namespaces:
-      names:
-        - hipstershop
   schedule: 8 6 * * *

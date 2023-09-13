@@ -4,8 +4,4 @@ metadata:
   name: daily-soc2-network-access
 spec:
   reportType: network-access
-  endpoints:
-    namespaces:
-      names:
-        - hipstershop
   schedule: 0 1 * * *

@@ -20,6 +20,7 @@ kubectl apply -n hipstershop -f https://raw.githubusercontent.com/GoogleCloudPla
 **Verify Pods are Running**
 
 After deploying the application, wait for all pods to come online in the namespace, this will take a couple of minutes.
+
 ```bash
 kubectl get pods -n hipstershop
 ```
