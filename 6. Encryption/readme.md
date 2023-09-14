@@ -19,13 +19,13 @@ kubectl debug node/$NODE_NAME -it --image=ubuntu
 Output will be like:
 
 ```bash
-Creating debugging pod node-debugger-aks-nodepool1-41939440-vmss000001-c9bjq with container debugger on node aks-nodepool1-41939440-vmss000001.
+Creating debugging pod node-debugger-ip-192-168-10-241.ca-central-1.compute.internal-fqvwm with container debugger on node ip-192-168-10-241.ca-central-1.compute.internal.
 If you don't see a command prompt, try pressing enter.
 ```
 Interact with the node session by running chroot /host from the privileged container.
 ```
-root@aks-nodepool1-37054976-vmss000002:/# chroot /host
-#
+root@ip-192-168-10-241:/# chroot /host
+sh-4.2#
 ```
 Run the following command:
 
@@ -68,7 +68,7 @@ Which will give us the following output showing the nodes Wireguard public key
 On each node we can also view the new interface created by Wireguard:
 
 ```
-root@aks-nodepool1-37054976-vmss000002:/# ifconfig | grep wireguard
+sh-4.2# ifconfig | grep wireguard
 wireguard.cali: flags=209<UP,POINTOPOINT,RUNNING,NOARP>  mtu 8941
 ```
 
